@@ -35,7 +35,7 @@
 @endphp
 
 
-<select id="{{ $name }}" multiple="multiple" name="{{ $name }}" class="form-control chosenSelect {{ array_get( $params, 'class' ) }}" {{ array_get( $params, 'extra' ) }} data-placeholder="{{ array_get( $params, 'placeholder' ) }}">
+<select id="{{ $name }}" multiple="multiple" name="{{ $name }}" class="form-control chosenSelect {{ array_get( $params, 'class' ) }}" {!! array_get( $params, 'extra' ) !!} data-placeholder="{{ array_get( $params, 'placeholder' ) }}">
 
 		@if( array_get( $params, 'placeholder' ) )
 
