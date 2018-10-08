@@ -68,7 +68,7 @@
 														<h4 class="subTitleB"><i class="fab fa-vuejs"></i> Verbo del Link {{ Form::hint( 'Verbo con el que se puede acceder a la ruta' ) }}</h4>
 
 														<div class="form-group">
-																{{ Form::chosen( 'verb', $verbs, '', [ 'placeholder' => 'Seleccionar Verbo', 'tabindex' => '4', 'extra' => 'validateEmpty=El verbo es obligatorio."' ] ) }}
+																{{ Form::chosen( 'verb', $verbs, '', [ 'placeholder' => 'Seleccionar Verbo', 'tabindex' => '4', 'extra' => 'validateEmpty="El verbo es obligatorio."' ] ) }}
 														</div>
 
 														<div class="ViewFields">
@@ -81,6 +81,7 @@
 																</div>
 
 														</div>
+														
 
 														<div class="NoViewFields">
 
@@ -88,7 +89,7 @@
 																<h4 class="subTitleB"><i class="fa fa-file-alt"></i> Controldor {{ Form::hint( 'El controlador es la clase que se encarga de procesar el link' ) }}</h4>
 
 																<div class="form-group">
-																		{{ Form::chosen( 'controller', $controllers, '', [ 'placeholder' => 'Seleccionar Controlador', 'tabindex' => '5', 'validateEmpty' => 'El controlador es obligatorio.' ] ) }}
+																		{{ Form::chosen( 'controller', $controllers, '', [ 'placeholder' => 'Seleccionar Controlador', 'tabindex' => '5', 'extra' => 'validateEmpty="El controlador es obligatorio."' ] ) }}
 																</div>
 
 																<!-- Route Method -->

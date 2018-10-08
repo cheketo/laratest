@@ -11,6 +11,6 @@
 
 	class="form-control TextAutoComplete {{ array_get( $params, 'class' ) }}"
 
-	{{ array_get( $params, 'extra' ) }} />
+	{!! array_get( $params, 'extra' ) !!} />
 
 <input type="hidden" id="{{ $name }}" name="{{ $name }}" value="{{ array_get( $value, 'hidden' ) }}" />
