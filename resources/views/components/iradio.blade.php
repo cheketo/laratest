@@ -22,6 +22,6 @@
 
 		@endif
 
-		{!! array_get( $params, 'extra' ) !!}
+		{{ array_get( $params, 'extra' ) }}
 
 >

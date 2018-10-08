@@ -18,7 +18,7 @@ class CustomInputsServiceProvider extends ServiceProvider
 
 				Form::component( 'chosen', 'components.chosen', [ 'name' => null, 'options' => array(), 'value' => null, 'params' => array() ] );
 
-				Form::component( 'multiple', 'components.multiple', [ 'name' => null, 'options' => array(), 'values' => array(), 'params' => array() ] );
+				Form::component( 'multiple', 'components.multiple', [ 'name' => null, 'options' => array(), 'values' => array(), 'params'=> array() ] );
 
 				Form::component( 'autocomplete', 'components.autocomplete',[ 'name' => null, 'values' => array(), 'params' => array() ] );
 

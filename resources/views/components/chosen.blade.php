@@ -1,4 +1,4 @@
-<select id="{{ $name }}" name="{{ $name }}" class="form-control chosenSelect {{ array_get( $params, 'class' ) }}" firstvalue="{{ array_get( $params, 'firstValue' ) }}" firsttext="{{ array_get( $params, 'firstText' ) }}" {!! array_get( $params, 'extra' ) !!} >
+<select id="{{ $name }}" name="{{ $name }}" class="form-control chosenSelect {{ array_get( $params, 'class' ) }}" {{ array_get( $params, 'extra' ) }} firstvalue="{{ array_get( $params, 'firstValue' ) }}" firsttext="{{ array_get( $params, 'firstText' ) }}" >
 
 		@if( array_get( $params, 'placeholder' ) )
 
