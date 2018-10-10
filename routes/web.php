@@ -12,24 +12,24 @@ use Illuminate\Support\Facades\Schema;
 |
 */
 
-// if( Schema::hasTable( 'middlewares' ) )
-// {
-//
-// 		$middlewares = App\Models\Middleware::all();
-//
-// 		foreach( $middlewares as $middleware )
-// 		{
-//
-// 				if( !in_array( $middleware->class, $this->middleware ) )
-// 				{
-//
-// 						$this->middleware[ $middleware->name ] = $middleware->class;
-//
-// 				}
-//
-// 		}
-//
-// }
+if( Schema::hasTable( 'middlewares' ) )
+{
+
+		$middlewares = App\Models\Middleware::all();
+
+		foreach( $middlewares as $middleware )
+		{
+
+				if( !in_array( $middleware->class, $this->middleware ) )
+				{
+
+						$this->middleware[ $middleware->name ] = $middleware->class;
+
+				}
+
+		}
+
+}
 
 
 
@@ -42,76 +42,76 @@ use Illuminate\Support\Facades\Schema;
 |
 */
 
-// if ( Schema::hasTable( 'routes' ) )
-// {
-//
-// 		$routes = App\Models\WebRoute::all();
-//
-// 		foreach( $routes as $route )
-// 		{
-//
-// 				$middlewares = $route->middlewares->map( function ( $middleware, $key )
-// 				{
-//
-// 				    return $middleware->name;
-//
-// 				});
-//
-// 				$middlewares = $middlewares->toArray();
-//
-// 				array_unshift( $middlewares, 'checkpermission:' . $route[ 'id' ] );
-//
-//
-// 				switch ( $route[ 'verb' ] )
-// 				{
-//
-// 						case 'post':
-//
-// 								Route::post( $route[ 'route' ], $route[ 'controller' ] . '@' . $route[ 'method' ] )->name( $route[ 'name' ] )->middleware( $middlewares );
-//
-// 						break;
-//
-// 						case 'put':
-//
-// 								Route::put( $route[ 'route' ], $route[ 'controller' ] . '@' . $route[ 'method' ] )->name( $route[ 'name' ] )->middleware( $middlewares );
-//
-// 						break;
-//
-// 						case 'patch':
-//
-// 								Route::patch( $route[ 'route' ], $route[ 'controller' ] . '@' . $route[ 'method' ] )->name( $route[ 'name' ] )->middleware( $middlewares );
-//
-// 						break;
-//
-// 						case 'delete':
-//
-// 								Route::delete( $route[ 'route' ], $route[ 'controller' ] . '@' . $route[ 'method' ] )->name( $route[ 'name' ] )->middleware( $middlewares );
-//
-// 						break;
-//
-// 						case 'options':
-//
-// 								Route::options( $route[ 'route' ], $route[ 'controller' ] . '@' . $route[ 'method' ] )->name( $route[ 'name' ] )->middleware( $middlewares );
-//
-// 						break;
-//
-// 						case 'view':
-//
-// 								Route::view( $route[ 'route' ], $route[ 'name' ] )->middleware( $middlewares );
-//
-// 						break;
-//
-// 						default:
-//
-// 								Route::get( $route[ 'route' ], $route[ 'controller' ] . '@' . $route[ 'method' ] )->name( $route[ 'name' ] )->middleware( $middlewares );
-//
-// 						break;
-//
-// 				}
-//
-// 		}
-//
-// }
+if ( Schema::hasTable( 'routes' ) )
+{
+
+		$routes = App\Models\WebRoute::all();
+
+		foreach( $routes as $route )
+		{
+
+				$middlewares = $route->middlewares->map( function ( $middleware, $key )
+				{
+
+				    return $middleware->name;
+
+				});
+
+				$middlewares = $middlewares->toArray();
+
+				array_unshift( $middlewares, 'checkpermission:' . $route[ 'id' ] );
+
+
+				switch ( $route[ 'verb' ] )
+				{
+
+						case 'post':
+
+								Route::post( $route[ 'route' ], $route[ 'controller' ] . '@' . $route[ 'method' ] )->name( $route[ 'name' ] )->middleware( $middlewares );
+
+						break;
+
+						case 'put':
+
+								Route::put( $route[ 'route' ], $route[ 'controller' ] . '@' . $route[ 'method' ] )->name( $route[ 'name' ] )->middleware( $middlewares );
+
+						break;
+
+						case 'patch':
+
+								Route::patch( $route[ 'route' ], $route[ 'controller' ] . '@' . $route[ 'method' ] )->name( $route[ 'name' ] )->middleware( $middlewares );
+
+						break;
+
+						case 'delete':
+
+								Route::delete( $route[ 'route' ], $route[ 'controller' ] . '@' . $route[ 'method' ] )->name( $route[ 'name' ] )->middleware( $middlewares );
+
+						break;
+
+						case 'options':
+
+								Route::options( $route[ 'route' ], $route[ 'controller' ] . '@' . $route[ 'method' ] )->name( $route[ 'name' ] )->middleware( $middlewares );
+
+						break;
+
+						case 'view':
+
+								Route::view( $route[ 'route' ], $route[ 'name' ] )->middleware( $middlewares );
+
+						break;
+
+						default:
+
+								Route::get( $route[ 'route' ], $route[ 'controller' ] . '@' . $route[ 'method' ] )->name( $route[ 'name' ] )->middleware( $middlewares );
+
+						break;
+
+				}
+
+		}
+
+}
 
 
 /*
