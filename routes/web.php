@@ -1,9 +1,5 @@
 <?php
 
-use App\Models\WebRoute;
-
-use App\Models\Middleware;
-
 use Illuminate\Support\Facades\Schema;
 
 
@@ -19,7 +15,7 @@ use Illuminate\Support\Facades\Schema;
 if( Schema::hasTable( 'middlewares' ) )
 {
 
-		$middlewares = Middleware::all();
+		$middlewares = App\Models\Middleware::all();
 
 }
 
@@ -54,7 +50,7 @@ if( $middlewares )
 if ( Schema::hasTable( 'routes' ) )
 {
 
-		$routes = WebRoute::all();
+		$routes = App\Models\WebRoute::all();
 
 }
 
