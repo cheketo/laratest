@@ -39,7 +39,7 @@ class WebRoute extends Model
 		public function middlewares()
 		{
 
-				return $this->belongsToMany( 'App\Models\Middleware', 'middleware_route', 'route_id', 'middleware_id' )->withTimestamps();
+				return $this->belongsToMany( 'App\Models\Middleware', 'middleware_route', 'route_id', 'middleware_id' )->withTimestamps()->withPivot( 'position' );
 
 		}
 

@@ -24,7 +24,7 @@ class CustomInputsServiceProvider extends ServiceProvider
 
 				Form::component( 'datepicker', 'components.datepicker',[ 'name' => null, 'value' => null, 'params' => array() ] );
 
-				Form::component( 'hint', 'components.hint',[ 'text', 'icon' => 'question-circle', 'color' => 'blue', 'position' => 'bottom' ] );
+				Form::component( 'hint', 'components.hint',[ 'text', 'position' => 'bottom-right', 'icon' => 'question-circle', 'icon' => 'fa fa-question-circle' , 'color' => 'blue', 'background' => 'info', 'effect' => 'bounce' ] );
 
 				Form::component( 'icheckbox', 'components.icheckbox',[ 'name', 'value' => null, 'checked' => false, 'params' => array() ] );
 

@@ -28,7 +28,7 @@ function create()
 		$( "#BtnCreate" ).click( function()
 		{
 
-				askAndSubmit( window.location.pathname, '/perfiles?msg=insert&element=' + $( '#name' ).val(), '¿Desea crear el perfil <b>' + $( '#name' ).val() + '</b>?' );
+				askAndSubmit( window.location.pathname, '/rutas?msg=insert&element=' + $( '#name' ).val(), '¿Desea crear la ruta <b>' + $( '#name' ).val() + '</b>?' );
 
 		});
 
@@ -47,7 +47,7 @@ function createNext()
 		$( "#BtnCreateNext" ).click( function()
 		{
 
-				askAndSubmit( window.location.pathname, '/perfiles/crear?msg=insert&element=' + $( '#name' ).val(), '¿Desea crear el perfil <b>' + $( '#name' ).val() + '</b>?' );
+				askAndSubmit( window.location.pathname, '/rutas/crear?msg=insert&element=' + $( '#name' ).val(), '¿Desea crear la ruta <b>' + $( '#name' ).val() + '</b>?' );
 
 		});
 

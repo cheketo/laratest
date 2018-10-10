@@ -18,11 +18,15 @@
 
 @section( 'scripts' )
 
-	{{ HTML::script( '/views/roles/js/main.js' ) }}
+{{ HTML::script( '/views/routes/js/main.js' ) }}
 
-	{{ HTML::script( '/views/roles/js/edit.js' ) }}
+{{ HTML::script( '/views/routes/js/edit.js' ) }}
 
-	{{ HTML::script( '/vendor/iCheck/icheck.min.js' ) }}
+{{ HTML::script( '/vendor/iCheck/icheck.min.js' ) }}
+
+{{ HTML::script( '/vendor/inputmask/inputmask.min.js' ) }}
+
+{{ HTML::script( '/vendor/inputmask/jquery.inputmask.min.js' ) }}
 
 @endsection
 
@@ -36,67 +40,147 @@
 
 						<div class="row">
 
-								<div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+								<div class="col-xs-12 col-sm-6 col-md-6">
 
 										<div class="flex-allCenter innerContainer">
 
 												<div class="mw100">
 
-														<h4 class="subTitleB"><i class="fa fa-bookmark"></i> Nombre {{ Form::hint( 'Nombre que tendrá el perfil' ) }}</h4>
+
+														<!-- Route Name -->
+														<h4 class="subTitleB"><i class="fa fa-bookmark"></i> Nombre {{ Form::hint( 'Nombre que representará la ruta' ) }}</h4>
 
 														<div class="form-group">
-																<input type="text" name="name" id="name" class="form-control" value="{{ $edit->name }}" placeholder="Nombre del Perfil" tabindex="1" validateEmpty="El nombre es obligatorio.">
+																<input type="text" value="{{ $edit->name }}" name="name" id="name" class="form-control" placeholder="Nombre de la Ruta" tabindex="1" validateEmpty="El nombre es obligatorio.">
 														</div>
 
-														<h4 class="subTitleB"><i class="fa fa-list-alt"></i> Descripción {{ Form::hint( 'Descripción que explica que permisos otorga y a que tipo de usuario está dirigido' ) }}</h4>
+														<!-- Route Link -->
+														<h4 class="subTitleB"><i class="fa fa-link"></i> Link {{ Form::hint( 'Link al que responderá la ruta' ) }}</h4>
 
 														<div class="form-group">
-																<textarea name="description" id="description" class="form-control" placeholder="Descripción del Perfil" tabindex="2" validateEmpty="El nombre es obligatorio." rows="8" cols="80">{{ $edit->description }}</textarea>
+																<input type="text" value="{{ $edit->route }}" name="route" id="route" class="form-control" placeholder="Link de la Ruta" tabindex="2" validateEmpty="El link es obligatorio.">
 														</div>
 
-														<h4 class="subTitleB"><i class="fa fa-key"></i> Permisos {{ Form::hint( 'Permisos que otorga este perfil' ) }}</h4>
+														<!-- Route Permission -->
+														<h4 class="subTitleB"><i class="fa fa-key"></i> Tipo de Acceso {{ Form::hint( 'El tipo de acceso indica que tipo de usuario puede acceder a la ruta' ) }}</h4>
+
+														<div class="form-group">
+																{{ Form::chosen( 'permission', $permissions, $edit->permission, [ 'placeholder' => 'Seleccionar Acceso', 'extra' => 'validateEmpty="El acceso es obligatorio." tabindex="3"' ] ) }}
+														</div>
+
+														<!-- Route Verb -->
+														<h4 class="subTitleB"><i class="fab fa-vuejs"></i> Verbo del Link {{ Form::hint( 'Verbo con el que se puede acceder a la ruta' ) }}</h4>
+
+														<div class="form-group">
+																{{ Form::chosen( 'verb', $verbs, $edit->verb, [ 'placeholder' => 'Seleccionar Verbo', 'extra' => 'validateEmpty="El verbo es obligatorio." tabindex="4"' ] ) }}
+														</div>
+
+														<div class="ViewFields">
+
+																<!-- Route View -->
+																<h4 class="subTitleB"><i class="fa fa-file-invoice"></i> Vista {{ Form::hint( 'Ubicación del archivo de la vista (En Laravel)' ) }}</h4>
+
+																<div class="form-group">
+																		<input type="text" value="{{ $edit->view }}" name="view" id="view" class="form-control" placeholder="Vista de la Ruta" tabindex="5" validateEmpty="La vista es obligatoria.">
+																</div>
+
+														</div>
+
+														<div class="NoViewFields">
+
+																<!-- Route Controller -->
+																<h4 class="subTitleB"><i class="fa fa-file-alt"></i> Controldor {{ Form::hint( 'El controlador es la clase que se encarga de procesar el link' ) }}</h4>
+
+																<div class="form-group">
+																		{{ Form::chosen( 'controller', $controllers, $edit->controller, [ 'placeholder' => 'Seleccionar Controlador', 'extra' => 'validateEmpty="El controlador es obligatorio." tabindex="6"' ] ) }}
+																</div>
+
+																<!-- Route Method -->
+																<h4 class="subTitleB"><i class="fab fa-elementor"></i> Método {{ Form::hint( 'Método del controlador que procesará el link' ) }}</h4>
+
+																<div class="form-group">
+																		<input type="text" value="{{ $edit->method }}" name="method" id="method" class="form-control" placeholder="Método de la Ruta" tabindex="7" validateEmpty="El método es obligatorio.">
+																</div>
+
+														</div>
+
+												</div>
+
+										</div>
+
+								</div>
+								<!-- col -->
+
+								<div class="col-xs-12 col-sm-6">
+
+										<div class="innerContainer">
+
+												<!-- Route Middlewares -->
+												<input type="hidden" name="middlewares" id="middlewares" value="">
+
+												<h4 class="subTitleB"><i class="fa fa-lock"></i> Middlewares {{ Form::hint( 'Los middlewares son instancias en las cuales se ejecutan acciones de chequeo de seguridad, manipulación de datos y redireccionamiento', 'bottom' ) }}</h4>
+
+												<div class="form-group">
+
+														<div class="row">
+
+																<div class="col-xs-12 col-sm-11" style="margin:0px;padding-right:0px;">
+
+																		{{ Form::chosen( 'middleware', $middlewares, '', [ 'placeholder' => 'Seleccionar Middleware', 'extra' => 'tabindex="8"', 'fieldvalue' => 'name'] ) }}
+
+																</div>
+
+																<div class="col-xs-12 col-sm-1" style="margin:0px;padding-left:5px;">
+
+																		<button type="button" id="addMiddleware" class="btn btn-primary hint--info hint--bottom hint--bounce" aria-label="Agregar" style="cursor:cell;" tabindex="8">
+																			<i class="fa fa-plus-circle"></i>
+																		</button>
+
+																</div>
+
+														</div>
+
+												</div>
+
+												<!-- Route Middlewares Table -->
+												<table id="middlewareTable" class="table table-striped table-hover Hidden">
+
+														<thead>
+
+																<tr>
+
+																		<th style="width:40px" class="txC">Posición</th>
+																		<th class="txC">Nombre</th>
+																		<th>Descripción</th>
+																		<th style="width: 40px"></th>
+
+																</tr>
+
+														</thead>
+
+														<tbody id="tableBody">
 
 																@php
 
-																		$bgClass = '';
-
-																		$relations = $edit->routes();
+																		$orderedMiddlewares = $edit->middlewares()->orderBy('middleware_route.position', 'asc')->get();
 
 																@endphp
 
-																@foreach( App\Models\WebRoute::all() as $route )
+																@foreach( $orderedMiddlewares->sortByDesc( 'middleware_route.position' ) as $middleware )
 
-																		@if( $route->status == 'A' )
+																		@php
 
-																				@php
+																				$view = \View::make( 'middlewares.components.row', [ 'middleware' => $middleware ] );
 
-																						$bgClass = $bgClass == '' ? 'bg-gray-light' : '';
+																		@endphp
 
-																						if( $edit->routes->contains( $route ) )
-																						{
-
-																								$checked = true;
-
-																						}else{
-
-																								$checked = false;
-
-																						}
-
-																				@endphp
-
-																				<div class="innerContainer {{ $bgClass }}" style="padding-top:10px;">
-
-																						{{ Form::icheckbox( 'route', $route->id, $checked, [ 'color' => '', 'shape' => 'flat' ] ) }} <strong> {{ $route->name }} </strong> ( <span class="text-blue"> {{ $route->route }} </span> )
-
-																				</div>
-
-																		@endif
+																		{!! $view->render() !!}
 
 																@endforeach
 
+														</tbody>
 
-												</div>
+												</table>
 
 										</div>
 
@@ -112,7 +196,7 @@
 				<!-- box-footer -->
 				<div class="box-footer txC">
 
-						<button type="button" class="btn btn-green" id="BtnUpdate" tabindex="100"><i class="fa fa-pencil"></i> Editar Perfil</button>
+						<button type="button" class="btn btn-green" id="BtnUpdate" tabindex="100"><i class="fa fa-pencil"></i> Editar Ruta</button>
 
 						<button type="button" class="btn btn-red BtnCancel" tabindex="102"><i class="fa fa-times"></i> Cancelar</button>
 

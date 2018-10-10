@@ -17,6 +17,10 @@ $( document ).ready( function()
 
 		changeVerb();
 
+		addMiddlewareButton();
+
+		syncMiddlewares();
+
 });
 
 
@@ -93,34 +97,7 @@ function toggleViewFields()
 		$( '#verb' ).change( function()
 		{
 
-				switch( $( this ).val().toLowerCase() )
-				{
-
-						case '':
-
-								hideViewFields();
-
-								hideNoViewFields();
-
-						break;
-
-						case 'view':
-
-								showViewFields();
-
-								hideNoViewFields();
-
-						break;
-
-						default:
-
-								hideViewFields();
-
-								showNoViewFields();
-
-						break;
-
-				}
+				changeVerb();
 
 		});
 
@@ -199,11 +176,197 @@ function showNoViewFields()
 function changeVerb()
 {
 
-		if( $( "#verb" ).val() )
+		switch( $( '#verb' ).val().toLowerCase() )
 		{
 
-				$( '#verb' ).change();
+				case '':
+
+						hideViewFields();
+
+						hideNoViewFields();
+
+				break;
+
+				case 'view':
+
+						showViewFields();
+
+						hideNoViewFields();
+
+				break;
+
+				default:
+
+						hideViewFields();
+
+						showNoViewFields();
+
+				break;
 
 		}
+
+}
+
+/*
+|-------------------------------------------------------------------------------
+|	Add Middleware Button
+|-------------------------------------------------------------------------------
+*/
+
+function addMiddlewareButton()
+{
+
+		$( '#addMiddleware' ).click( function()
+		{
+
+				var middleware = $( '#middleware' ).val();
+
+				if( middleware )
+				{
+
+						addMiddlewareRow( middleware );
+
+				}else{
+
+						notifyWarning( 'Seleccione un middleware antes de agregarlo.' );
+
+				}
+
+		});
+
+}
+
+/*
+|-------------------------------------------------------------------------------
+|	Add Middleware Row
+|-------------------------------------------------------------------------------
+*/
+
+function addMiddlewareRow( middleware )
+{
+
+		if( middleware > 0 )
+		{
+
+				var data    = { id: middleware };
+
+				var process = '/middleware/get/row';
+
+				$.ajax(
+				{
+
+						url: process,
+
+						type: 'POST',
+
+						data: data,
+
+						cache: false,
+
+						async: true,
+
+						success: function( response )
+						{
+
+								var table = $( '#tableBody' );
+
+								if( table.children().length > 1 )
+								{
+
+										var lastPosition = table.children().last().children( 'td' ).children( 'input' ).val();
+
+								}else{
+
+										var lastPosition = 0;
+
+								}
+
+								table.append( response.contents );
+
+								var row = 	table.children().last();
+
+								row.children( 'td' ).children( 'input' ).val( ( parseInt( lastPosition ) + 1 ) );
+
+								syncMiddlewares();
+
+								removeMiddlewareRow();
+
+								hideLoader();
+
+						},
+
+						error: function( response )
+						{
+
+								notifyError( 'Se produjo un error al intentar agregar un middleware' );
+
+								console.log( response );
+
+						}
+
+				});
+
+		}
+
+}
+
+
+/*
+|-------------------------------------------------------------------------------
+|	Remove Middleware Row
+|-------------------------------------------------------------------------------
+*/
+
+function removeMiddlewareRow()
+{
+
+		$( '.removeMiddleware' ).click( function( event )
+		{
+
+				event.stopPropagation();
+
+				$( this ).parent().parent().remove();
+
+				syncMiddlewares();
+
+		});
+
+}
+
+
+/*
+|-------------------------------------------------------------------------------
+|	Sync Middlewares
+|-------------------------------------------------------------------------------
+*/
+
+function syncMiddlewares()
+{
+
+		$( '#middlewareTable' ).addClass( 'Hidden' );
+
+		var middlewares = '';
+
+		$( '.rowMiddleware' ).each( function()
+		{
+
+				id = $( this ).attr( 'middleware' );
+
+				if( middlewares == '' )
+				{
+
+						middlewares = id;
+
+				}else{
+
+						middlewares = middlewares + ',' + id;
+
+				}
+
+				$( '#middlewareTable' ).removeClass( 'Hidden' );
+
+		});
+
+		$( '#middlewares' ).val( middlewares );
 
 }

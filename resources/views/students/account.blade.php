@@ -9,6 +9,7 @@
 @section( 'scripts' )
 
 	{{ HTML::script( '/views/students/js/students.js' ) }}
+	
 	{{ HTML::script( '/views/students/js/account.js' ) }}
 
 @endsection

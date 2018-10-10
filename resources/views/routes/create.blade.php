@@ -24,6 +24,10 @@
 
 	{{ HTML::script( '/vendor/iCheck/icheck.min.js' ) }}
 
+	{{ HTML::script( '/vendor/inputmask/inputmask.min.js' ) }}
+
+	{{ HTML::script( '/vendor/inputmask/jquery.inputmask.min.js' ) }}
+
 @endsection
 
 @section( 'content' )
@@ -36,7 +40,7 @@
 
 						<div class="row">
 
-								<div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+								<div class="col-xs-12 col-sm-6 col-md-6">
 
 										<div class="flex-allCenter innerContainer">
 
@@ -58,17 +62,17 @@
 														</div>
 
 														<!-- Route Permission -->
-														<h4 class="subTitleB"><i class="fa fa-lock"></i> Tipo de Acceso {{ Form::hint( 'El tipo de acceso indica que tipo de usuario puede acceder a la ruta' ) }}</h4>
+														<h4 class="subTitleB"><i class="fa fa-key"></i> Tipo de Acceso {{ Form::hint( 'El tipo de acceso indica que tipo de usuario puede acceder a la ruta' ) }}</h4>
 
 														<div class="form-group">
-																{{ Form::chosen( 'permission', $permissions, '', [ 'placeholder' => 'Seleccionar Acceso', 'tabindex' => '3', 'extra' => 'validateEmpty=El acceso es obligatorio."' ] ) }}
+																{{ Form::chosen( 'permission', $permissions, '', [ 'placeholder' => 'Seleccionar Acceso', 'extra' => 'validateEmpty="El acceso es obligatorio." tabindex="3"' ] ) }}
 														</div>
 
 														<!-- Route Verb -->
 														<h4 class="subTitleB"><i class="fab fa-vuejs"></i> Verbo del Link {{ Form::hint( 'Verbo con el que se puede acceder a la ruta' ) }}</h4>
 
 														<div class="form-group">
-																{{ Form::chosen( 'verb', $verbs, '', [ 'placeholder' => 'Seleccionar Verbo', 'tabindex' => '4', 'extra' => 'validateEmpty="El verbo es obligatorio."' ] ) }}
+																{{ Form::chosen( 'verb', $verbs, '', [ 'placeholder' => 'Seleccionar Verbo', 'extra' => 'validateEmpty="El verbo es obligatorio." tabindex="4"' ] ) }}
 														</div>
 
 														<div class="ViewFields">
@@ -77,11 +81,10 @@
 																<h4 class="subTitleB"><i class="fa fa-file-invoice"></i> Vista {{ Form::hint( 'Ubicación del archivo de la vista (En Laravel)' ) }}</h4>
 
 																<div class="form-group">
-																		<input type="text" name="view" id="view" class="form-control" placeholder="Vista de la Ruta" tabindex="6" validateEmpty="La vista es obligatoria.">
+																		<input type="text" name="view" id="view" class="form-control" placeholder="Vista de la Ruta" tabindex="5" validateEmpty="La vista es obligatoria.">
 																</div>
 
 														</div>
-														
 
 														<div class="NoViewFields">
 
@@ -89,22 +92,79 @@
 																<h4 class="subTitleB"><i class="fa fa-file-alt"></i> Controldor {{ Form::hint( 'El controlador es la clase que se encarga de procesar el link' ) }}</h4>
 
 																<div class="form-group">
-																		{{ Form::chosen( 'controller', $controllers, '', [ 'placeholder' => 'Seleccionar Controlador', 'tabindex' => '5', 'extra' => 'validateEmpty="El controlador es obligatorio."' ] ) }}
+																		{{ Form::chosen( 'controller', $controllers, '', [ 'placeholder' => 'Seleccionar Controlador', 'extra' => 'validateEmpty="El controlador es obligatorio." tabindex="6"' ] ) }}
 																</div>
 
 																<!-- Route Method -->
 																<h4 class="subTitleB"><i class="fab fa-elementor"></i> Método {{ Form::hint( 'Método del controlador que procesará el link' ) }}</h4>
 
 																<div class="form-group">
-																		<input type="text" name="method" id="method" class="form-control" placeholder="Método de la Ruta" tabindex="6" validateEmpty="El método es obligatorio.">
+																		<input type="text" name="method" id="method" class="form-control" placeholder="Método de la Ruta" tabindex="7" validateEmpty="El método es obligatorio.">
 																</div>
 
 														</div>
 
+												</div>
 
+										</div>
 
+								</div>
+								<!-- col -->
+
+								<div class="col-xs-12 col-sm-6">
+
+										<div class="innerContainer">
+
+												<!-- Route Middlewares -->
+												<input type="hidden" name="middlewares" id="middlewares" value="">
+
+												<h4 class="subTitleB"><i class="fa fa-lock"></i> Middlewares {{ Form::hint( 'Los middlewares son instancias en las cuales se ejecutan acciones de chequeo de seguridad, manipulación de datos y redireccionamiento', 'bottom' ) }}</h4>
+
+												<div class="form-group">
+
+														<div class="row">
+
+																<div class="col-xs-12 col-sm-11" style="margin:0px;padding-right:0px;">
+
+																		{{ Form::chosen( 'middleware', $middlewares, '', [ 'placeholder' => 'Seleccionar Middleware', 'extra' => 'tabindex="8"', 'fieldvalue' => 'name'] ) }}
+
+																</div>
+
+																<div class="col-xs-12 col-sm-1" style="margin:0px;padding-left:5px;">
+
+																		<button type="button" id="addMiddleware" class="btn btn-primary hint--info hint--bottom hint--bounce" aria-label="Agregar" style="cursor:cell;" tabindex="8">
+																			<i class="fa fa-plus-circle"></i>
+																		</button>
+
+																</div>
+
+														</div>
 
 												</div>
+
+												<!-- Route Middlewares Table -->
+												<table id="middlewareTable" class="table table-striped table-hover Hidden">
+
+						                <thead>
+
+																<tr>
+
+						                  			<th style="width:40px" class="txC">Posición</th>
+									                  <th class="txC">Nombre</th>
+									                  <th>Descripción</th>
+									                  <th style="width: 40px"></th>
+
+						                		</tr>
+
+						              	</thead>
+
+														<tbody id="tableBody">
+
+
+
+						              	</tbody>
+
+												</table>
 
 										</div>
 
@@ -120,9 +180,9 @@
 				<!-- box-footer -->
 				<div class="box-footer txC">
 
-						<button type="button" class="btn btn-green" id="BtnCreate" tabindex="100"><i class="fa fa-plus"></i> Crear Nuevo Perfil</button>
+						<button type="button" class="btn btn-green" id="BtnCreate" tabindex="100"><i class="fa fa-plus"></i> Crear Nueva Ruta</button>
 
-						<button type="button" class="btn btn-blue" id="BtnCreateNext" tabindex="101"><i class="fa fa-plus"></i> Crear y Agregar Otro</button>
+						<button type="button" class="btn btn-blue" id="BtnCreateNext" tabindex="101"><i class="fa fa-plus"></i> Crear y Agregar Otra</button>
 
 						<button type="button" class="btn btn-red BtnCancel" tabindex="102"><i class="fa fa-times"></i> Cancelar</button>
 

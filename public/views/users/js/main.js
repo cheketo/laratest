@@ -70,7 +70,7 @@ function uploadImage()
 		$( "#image" ).change( function()
 		{
 
-				var route		= '/ajax/upload/image';
+				var route		= '/user/upload/image';
 
 				var success		= function( response )
 				{

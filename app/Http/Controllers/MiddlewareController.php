@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Middleware;
+
 class MiddlewareController extends Controller
 {
 
@@ -84,5 +86,35 @@ class MiddlewareController extends Controller
 		{
 				//
 		}
-		
+
+		public function getRow( Request $request )
+		{
+
+				$id = $request->id;
+
+				if( $request->ajax() && $id )
+				{
+
+						$middleware = Middleware::find( $id );
+
+						$view = \View::make( 'middlewares.components.row', [ 'middleware' => $middleware ] );
+
+						// dd( $view );
+
+						$contents = $view->render();
+
+						return response()->json(
+						[
+
+								'valid' => true,
+
+								'contents' => $contents
+
+						]);
+
+				}
+
+
+		}
+
 }

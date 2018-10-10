@@ -613,8 +613,6 @@ function chosenSelect()
 
 						}
 
-
-
 				});
 
   	}

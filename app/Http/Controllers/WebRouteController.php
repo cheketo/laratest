@@ -8,9 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Models\WebRoute;
 
-// use App\Models\Student;
-
-// use App\Models\Administrator;
+use App\Models\Middleware;
 
 class WebRouteController extends Controller
 {
@@ -138,7 +136,9 @@ class WebRouteController extends Controller
 
 				$permissions = self::getPermissionsName( 'assoc' );
 
-				return view( 'routes.create', compact( 'verbs', 'permissions', 'controllers' ) );
+				$middlewares = Middleware::where( 'name', '!=', 'checkpermission' )->orderBy( 'name' )->get();
+
+				return view( 'routes.create', compact( 'verbs', 'permissions', 'controllers', 'middlewares' ) );
 
 	  }
 
@@ -151,7 +151,60 @@ class WebRouteController extends Controller
 	  public function store( Request $request )
 	  {
 
-				//
+				if( $request->ajax() )
+				{
+
+						$new 							= new WebRoute();
+
+						$new->name 				= $request->name;
+
+						$new->route 			= $request->route;
+
+						$new->permission 	= $request->permission;
+
+						$new->verb 				= $request->verb;
+
+						if( strtolower( $new->verb ) == 'view')
+						{
+
+								$new->view = $request->view;
+
+						}else{
+
+								$new->controller = $request->controller;
+
+								$new->method = $request->method;
+
+						}
+
+						$new->save();
+
+						if( $request->middlewares )
+						{
+
+								$sync_data = [];
+
+								foreach( explode( ',', $request->middlewares ) as $id )
+								{
+
+										$position = $request->post( 'middleware_position_' . $id );
+
+										$sync_data[ $id ] = [ 'position' => $position ];
+
+								}
+
+								$new->middlewares()->sync( $sync_data );
+
+						}
+
+						return response()->json(
+						[
+
+								'valid' => true
+
+						]);
+
+				}
 
 	  }
 
@@ -175,9 +228,27 @@ class WebRouteController extends Controller
 	  public function edit( $id )
 	  {
 
+				foreach( self::getControllersName() as $controller )
+				{
+
+						$controllers[ $controller ] = $controller;
+
+				}
+
+				foreach( self::getVerbsName() as $verb )
+				{
+
+						$verbs[ $verb ] = $verb;
+
+				}
+
+				$permissions = self::getPermissionsName( 'assoc' );
+
 				$edit = WebRoute::find( $id );
 
-				return view( 'routes.edit', [ 'edit' => $edit ] );
+				$middlewares = Middleware::where( 'name', '!=', 'checkpermission' )->orderBy( 'name' )->get();
+
+				return view( 'routes.edit', compact( 'edit', 'controllers', 'verbs', 'permissions', 'middlewares' ) );
 
 	  }
 
@@ -188,9 +259,78 @@ class WebRouteController extends Controller
 	   * @param  int  $id
 	   * @return \Illuminate\Http\Response
 	   */
-	  public function update(Request $request, $id)
+	  public function update( Request $request, $id )
 	  {
-	      //
+
+				if( $request->ajax() )
+				{
+
+						$edit = WebRoute::find( $id );
+
+						if( $edit )
+						{
+
+								$edit->name 			= $request->name;
+
+								$edit->route 			= $request->route;
+
+								$edit->permission = $request->permission;
+
+								$edit->verb 			= $request->verb;
+
+								if( strtolower( $edit->verb ) == 'view')
+								{
+
+										$edit->view = $request->view;
+
+								}else{
+
+										$edit->controller = $request->controller;
+
+										$edit->method = $request->method;
+
+								}
+
+								$edit->update();
+
+								if( $request->middlewares )
+								{
+
+										$sync_data = [];
+
+										foreach( explode( ',', $request->middlewares ) as $id )
+										{
+
+												$position = $request->post( 'middleware_position_' . $id );
+
+												$sync_data[ $id ] = [ 'position' => $position ];
+
+										}
+
+										$edit->middlewares()->sync( $sync_data );
+
+								}
+
+								return response()->json(
+								[
+
+										'valid' => true
+
+								]);
+
+						}else{
+
+								return response()->json(
+								[
+
+										'valid' => false
+
+								], 404);
+
+						}
+
+				}
+
 	  }
 
 	  /**
@@ -259,6 +399,5 @@ class WebRouteController extends Controller
 				return $permissions;
 
 		}
-
 
 }

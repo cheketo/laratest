@@ -107,17 +107,17 @@ class UserController extends Controller
 				if( $request->ajax() )
 				{
 
-						$user 						= new User();
+						$new 							= new User();
 
-						$user->user 			= $request->user;
+						$new->user 				= $request->user;
 
-						$user->password 	= bcrypt( $request->password );
+						$new->password 		= bcrypt( $request->password );
 
-						$user->email 			= $request->email;
+						$new->email 			= $request->email;
 
-						$user->last_name 	= $request->last_name;
+						$new->last_name 	= $request->last_name;
 
-						$user->first_name = $request->first_name;
+						$new->first_name 	= $request->first_name;
 
 						if( strpos( $request->newimage, '/') === false )
 						{
@@ -130,16 +130,16 @@ class UserController extends Controller
 
 						}
 
-						$user->image_id = $image->id;
+						$new->image_id = $image->id;
 
-						$user->save();
+						$new->save();
 
 						$roles 						= Role::whereIn( 'id', explode( ',', $request->roles ) )->get();
 
 						foreach( $roles as $role )
 						{
 
-								$user->roles()->attach( $role );
+								$new->roles()->attach( $role );
 
 						}
 

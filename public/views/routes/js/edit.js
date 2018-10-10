@@ -26,7 +26,7 @@ function update()
 		$( "#BtnUpdate" ).click( function()
 		{
 
-				askAndSubmit( window.location.pathname, '/perfiles?msg=update&element=' + $( '#name' ).val(), '¿Desea modificar el perfil <b>' + $( '#name' ).val() + '</b>?' );
+				askAndSubmit( window.location.pathname, '/rutas?msg=update&element=' + $( '#name' ).val(), '¿Desea modificar la ruta <b>' + $( '#name' ).val() + '</b>?' );
 
 		});
 

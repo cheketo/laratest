@@ -15,7 +15,7 @@ class Middleware extends Model
 		public function routes()
 		{
 
-				return $this->belongsToMany( 'App\Models\WebRoute', 'middleware_route', 'middleware_id', 'route_id' )->withTimestamps();
+				return $this->belongsToMany( 'App\Models\WebRoute', 'middleware_route', 'middleware_id', 'route_id' )->withTimestamps()->withPivot( 'position' );
 
 		}
 

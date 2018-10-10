@@ -26,6 +26,8 @@ class CreateMiddlewaresTable extends Migration
 
 						$table->string( 'class' );
 
+						$table->string( 'description' )->nullable();
+
 						$table->char( 'status', 1 )->default( 'A' );
 
 						$table->timestamps();

@@ -46,7 +46,7 @@
 														<br>
 
 														<div class="form-group">
-																<input type="text" name="user" id="user" value="{{ $user->user }}" class="form-control" placeholder="Usuario" tabindex="1" validateEmpty="El usuario es obligatorio." validateMinLength="3///El usuario debe contener 3 caracteres como mínimo" validateFromFile="/ajax/user/validateuser///El usuario ya existe///actualvalue:={{ $user->user }}">
+																<input type="text" name="user" id="user" value="{{ $user->user }}" class="form-control" placeholder="Usuario" tabindex="1" validateEmpty="El usuario es obligatorio." validateMinLength="3///El usuario debe contener 3 caracteres como mínimo" validateFromFile="/user/validate/user///El usuario ya existe///actualvalue:={{ $user->user }}">
 														</div>
 
 														<br>
@@ -64,7 +64,7 @@
 														<br>
 
 														<div class="form-group">
-																<input type="email" id="email" name="email" value="{{ $user->email }}" class="form-control" placeholder="Email" validateEmail="Ingrese un email válido" validateMinLength="4///El email debe contener 4 caracteres como mínimo." tabindex="4" validateFromFile="/ajax/user/validateemail///El email ya existe///actualvalue:={{ $user->email }}">
+																<input type="email" id="email" name="email" value="{{ $user->email }}" class="form-control" placeholder="Email" validateEmail="Ingrese un email válido" validateMinLength="4///El email debe contener 4 caracteres como mínimo." tabindex="4" validateFromFile="/user/validate/email///El email ya existe///actualvalue:={{ $user->email }}">
 														</div>
 
 														<br>

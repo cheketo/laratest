@@ -1,1 +1,1 @@
-<span class="text-blue hint--info hint--bottom-right hint--bounce" aria-label="{{ $text }}" ><i class="fa fa-question-circle"></i><span>
+<span style="cursor: help;" class="text-{{ $color }} hint--{{ $background }} hint--{{ $position }} hint--{{ $effect }}" aria-label="{{ $text }}" ><i class="{{ $icon }}"></i><span>

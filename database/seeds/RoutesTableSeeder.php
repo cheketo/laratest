@@ -432,8 +432,8 @@ class RoutesTableSeeder extends Seeder
 				 */
 
 				$route 							= new WebRoute();
- 				$route->route 			= '/ajax/upload/image';
- 				$route->name 				= 'ajax_upload_image';
+ 				$route->route 			= '/user/upload/image';
+ 				$route->name 				= 'user_upload_image';
  				$route->verb 				= 'post';
  				$route->controller 	= 'FileController';
  				$route->method 			= 'upoadImage';
@@ -441,8 +441,8 @@ class RoutesTableSeeder extends Seeder
  				$route->save();
 
 				$route 							= new WebRoute();
- 				$route->route 			= '/ajax/user/validateuser';
- 				$route->name 				= 'ajax_validate_user';
+ 				$route->route 			= '/user/validate/user';
+ 				$route->name 				= 'user_validate_user';
  				$route->verb 				= 'post';
  				$route->controller 	= 'UserController';
  				$route->method 			= 'validateUser';
@@ -450,11 +450,20 @@ class RoutesTableSeeder extends Seeder
  				$route->save();
 
 				$route 							= new WebRoute();
- 				$route->route 			= '/ajax/user/validateemail';
- 				$route->name 				= 'ajax_validate_email';
+ 				$route->route 			= '/user/validate/email';
+ 				$route->name 				= 'user_validate_email';
  				$route->verb 				= 'post';
  				$route->controller 	= 'UserController';
  				$route->method 			= 'validateEmail';
+ 				$route->permission 	= 'role';
+ 				$route->save();
+
+				$route 							= new WebRoute();
+ 				$route->route 			= '/middleware/get/row';
+ 				$route->name 				= 'middleware_get_row';
+ 				$route->verb 				= 'post';
+ 				$route->controller 	= 'MiddlewareController';
+ 				$route->method 			= 'getRow';
  				$route->permission 	= 'role';
  				$route->save();
 

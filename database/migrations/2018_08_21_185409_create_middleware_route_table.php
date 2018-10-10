@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Schema;
+
 use Illuminate\Database\Schema\Blueprint;
+
 use Illuminate\Database\Migrations\Migration;
 
 class CreateMiddlewareRouteTable extends Migration
@@ -13,16 +15,19 @@ class CreateMiddlewareRouteTable extends Migration
      */
     public function up()
     {
-        Schema::create('middleware_route', function (Blueprint $table)
+
+        Schema::create( 'middleware_route', function ( Blueprint $table )
 				{
 
-						$table->integer('route_id')->unsigned()->index();
-						$table->foreign('route_id')->references('id')->on('routes')->onDelete('cascade');
-						$table->integer('middleware_id')->unsigned()->index();
-						$table->foreign('middleware_id')->references('id')->on('middlewares')->onDelete('cascade');
+						$table->integer( 'route_id' )->unsigned()->index();
+						$table->foreign( 'route_id' )->references( 'id' )->on( 'routes' )->onDelete( 'cascade' );
+						$table->integer( 'middleware_id' )->unsigned()->index();
+						$table->foreign( 'middleware_id' )->references( 'id' )->on( 'middlewares' )->onDelete( 'cascade' );
+						$table->integer( 'position' )->unsigned()->default( '0' );
 						$table->timestamps();
-						
+
         });
+
     }
 
     /**
@@ -32,6 +37,9 @@ class CreateMiddlewareRouteTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('middleware_route');
+
+        Schema::dropIfExists( 'middleware_route' );
+
     }
+
 }
