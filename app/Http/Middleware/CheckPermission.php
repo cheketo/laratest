@@ -36,10 +36,9 @@ class CheckPermission
 				// else
 				// 		dd( $params );
 
-
-
-
 				$route = WebRoute::find( $route_id );
+
+
 
 				if( $route )
 				{
@@ -92,6 +91,7 @@ class CheckPermission
 				}
 
         return $next( $request );
+
     }
 
 }

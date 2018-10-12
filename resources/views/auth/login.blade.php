@@ -2,15 +2,15 @@
 
 @section( 'scripts' )
 
-		{{ HTML::script( 'views/auth/js/login.js' ) }}
+		{{ HTML::script( '/views/auth/js/login.js' ) }}
 
-		{{ HTML::script( 'vendor/bootstrap-notify/notify.js' ) }}
+		{{ HTML::script( '/vendor/notify/notify.js' ) }}
 
 @endsection
 
 @section( 'styles' )
 
-	{{ HTML::style( 'views/auth/css/login.css' ) }}
+	{{ HTML::style( '/views/auth/css/login.css' ) }}
 
 @endsection
 

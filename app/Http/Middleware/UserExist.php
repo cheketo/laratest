@@ -3,12 +3,16 @@
 namespace App\Http\Middleware;
 
 use Closure;
+
 use App\Models\User;
+
 use App\Http\Controllers\UserController;
+
 use Illuminate\Support\Facades\Validator;
 
 class UserExist
 {
+
     /**
      * Handle an incoming request.
      *
@@ -16,16 +20,21 @@ class UserExist
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle( $request, Closure $next )
     {
-				$validator = Validator::make(request()->all(), [
-					'login' => 'required|string',
-					'password' => 'required|string'
+
+				$validator = Validator::make( request()->all(), [
+
+						'login' => 'required|string',
+
+						'password' => 'required|string'
+
 				]);
 
-				if($validator->fails())
+				if( $validator->fails() )
 				{
-						return back()->withErrors(['login' => 'Ingrese todos los datos'])->withInput();
+
+						return back()->withErrors( [ 'login' => 'Ingrese todos los datos' ] )->withInput();
 						// if($this->isEmail(array('email' => $request -> login)))
 						// {
 						// 		$request -> password = md5($request -> password);

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Schema;
 if( Schema::hasTable( 'middlewares' ) )
 {
 
-		$middlewares = App\Models\Middleware::all();
+		$middlewares = App\Models\Middleware::where( 'status', '=', 'A' )->get();
 
 		foreach( $middlewares as $middleware )
 		{
@@ -45,7 +45,7 @@ if( Schema::hasTable( 'middlewares' ) )
 if ( Schema::hasTable( 'routes' ) )
 {
 
-		$routes = App\Models\WebRoute::all();
+		$routes = App\Models\WebRoute::where( 'status', '=', 'A' )->get();
 
 		foreach( $routes as $route )
 		{
@@ -53,7 +53,12 @@ if ( Schema::hasTable( 'routes' ) )
 				$middlewares = $route->middlewares->map( function ( $middleware, $key )
 				{
 
-				    return $middleware->name;
+						if( $middleware->status == 'A' )
+						{
+
+								return $middleware->name;
+
+						}
 
 				});
 
@@ -61,8 +66,14 @@ if ( Schema::hasTable( 'routes' ) )
 
 				array_unshift( $middlewares, 'checkpermission:' . $route[ 'id' ] );
 
+				if( $route[ 'permission' ] == 'private' || $route[ 'permission' ] == 'role' )
+				{
 
-				switch ( $route[ 'verb' ] )
+						array_unshift( $middlewares, 'auth' );
+
+				}
+
+				switch ( strtolower( $route[ 'verb' ] ) )
 				{
 
 						case 'post':
@@ -97,7 +108,7 @@ if ( Schema::hasTable( 'routes' ) )
 
 						case 'view':
 
-								Route::view( $route[ 'route' ], $route[ 'name' ] )->middleware( $middlewares );
+								Route::view( $route[ 'route' ], $route[ 'view' ] )->name( $route[ 'name' ] )->middleware( $middlewares );
 
 						break;
 
@@ -125,34 +136,10 @@ if ( Schema::hasTable( 'routes' ) )
 |
 */
 
-Route::get( '/', 'Auth\LoginController@showLoginForm' );
-
-Route::post( '/logout', 'Auth\LoginController@logout' )->name( 'logout' );
-
-Route::get( '/login', 'Auth\LoginController@showLoginForm' );
-
-Route::get( '/user/create', 'UserController@create' )->name( 'userCreate' );
-
-// Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-// Route::post('/login', 'Auth\LoginController@login')->name('login')->middleware('userexist');
-
-/*
-|--------------------------------------------------------------------------
-| Ajax Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register ajax routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group.
-|
-*/
-
-Route::post( '/login', 'Auth\LoginController@login' )->name( 'login' )->middleware( 'userexist' );
-
-
-// Route::post('/ajax/{controller}/{method}', function($controller,$method)
-// {
+// Route::get( '/', 'Auth\LoginController@showLoginForm' );
 //
+// Route::post( '/logout', 'Auth\LoginController@logout' )->name( 'logout' );
 //
+// Route::get( '/login', 'Auth\LoginController@showLoginForm' );
 //
-// })->middleware('auth');
+// Route::post( '/login', 'Auth\LoginController@login' )->name( 'login' )->middleware( 'userexist' );

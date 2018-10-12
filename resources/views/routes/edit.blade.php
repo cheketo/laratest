@@ -1,10 +1,10 @@
 @extends( 'layouts.private' )
 
-@section( 'tab_title', 'Editar Perfil' )
+@section( 'tab_title', 'Editar Ruta' )
 
 @section( 'page_title' )
 
-	<i class="fa fa-pencil-square"></i> Perfil
+	<i class="fa fa-pencil-square"></i> Ruta
 
 @endsection
 
@@ -72,7 +72,7 @@
 														<h4 class="subTitleB"><i class="fab fa-vuejs"></i> Verbo del Link {{ Form::hint( 'Verbo con el que se puede acceder a la ruta' ) }}</h4>
 
 														<div class="form-group">
-																{{ Form::chosen( 'verb', $verbs, $edit->verb, [ 'placeholder' => 'Seleccionar Verbo', 'extra' => 'validateEmpty="El verbo es obligatorio." tabindex="4"' ] ) }}
+																{{ Form::chosen( 'verb', $verbs, strtoupper( $edit->verb ), [ 'placeholder' => 'Seleccionar Verbo', 'extra' => 'validateEmpty="El verbo es obligatorio." tabindex="4"' ] ) }}
 														</div>
 
 														<div class="ViewFields">

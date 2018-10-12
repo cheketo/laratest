@@ -16,8 +16,6 @@ class WebRouteController extends Controller
 		public function __construct()
 		{
 
-				$this->middleware( 'auth' );
-
 		}
 
 
@@ -246,7 +244,7 @@ class WebRouteController extends Controller
 
 				$edit = WebRoute::find( $id );
 
-				$middlewares = Middleware::where( 'name', '!=', 'checkpermission' )->orderBy( 'name' )->get();
+				$middlewares = Middleware::where( 'name', '!=', 'checkpermission' )->where( 'status', '=', 'A' )->orderBy( 'name' )->get();
 
 				return view( 'routes.edit', compact( 'edit', 'controllers', 'verbs', 'permissions', 'middlewares' ) );
 
@@ -309,6 +307,10 @@ class WebRouteController extends Controller
 
 										$edit->middlewares()->sync( $sync_data );
 
+								}else{
+
+										$edit->middlewares()->detach();
+
 								}
 
 								return response()->json(
@@ -333,18 +335,62 @@ class WebRouteController extends Controller
 
 	  }
 
-	  /**
-	   * Remove the specified resource from storage.
-	   *
-	   * @param  int  $id
-	   * @return \Illuminate\Http\Response
-	   */
-	  public function destroy($id)
-	  {
+		/**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete( Request $request, $id )
+    {
 
-	      //
+				return response()->json(
+				[
 
-	  }
+						'valid' => $this->changeStatus( $request, $id, 'I' )
+
+				]);
+
+    }
+
+		/**
+     * Activate the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function activate( Request $request, $id )
+    {
+
+				return response()->json(
+				[
+
+						'valid' => $this->changeStatus( $request, $id, 'A' )
+
+				]);
+
+    }
+
+		public function changeStatus( $request, $id, $status )
+		{
+				if( $request->ajax() )
+				{
+
+						$delete 						= WebRoute::find( $id );
+
+						$delete->status 		= $status;
+
+						$delete->update();
+
+						return true;
+
+				}else{
+
+						return false;
+
+				}
+
+		}
 
 		public static function getControllersName()
 		{

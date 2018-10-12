@@ -26,4 +26,53 @@ class Middleware extends Model
 
 		}
 
+		// Scopes
+		public function scopeName( $query, $name )
+		{
+
+				if( trim( $name ) != '' )
+				{
+
+						$query->where( 'middlewares.name', 'LIKE', '%' . $name . '%' );
+
+				}
+
+		}
+
+		public function scopeClass( $query, $class )
+		{
+
+				if( trim( $class ) != '' )
+				{
+
+						$query->where( 'middlewares.class', 'LIKE', '%' . $class . '%' );
+
+				}
+
+		}
+
+		public function scopeDescription( $query, $description )
+		{
+
+				if( trim( $description ) != '' )
+				{
+
+						$query->where( 'middlewares.description', 'LIKE', '%' . $description . '%' );
+
+				}
+
+		}
+
+		public function scopeId( $query, $id )
+		{
+
+				if( trim( $id ) != '' )
+				{
+
+						$query->where( 'middlewares.id', $id );
+
+				}
+
+		}
+
 }

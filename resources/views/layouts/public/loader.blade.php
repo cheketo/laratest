@@ -1,9 +1,12 @@
 
+<!-- Loader  -->
 <div class="loader animated fadeIn Hidden">
 
 	  <img class="loaderLogo" src="/images/skin/logouba.png" alt="Logo UBA" />
 
-	  <img class="loaderGif" src="../../../../skin/images/body/icons/loader.gif" alt="" />
+		<br>
+
+	  <img class="loaderGif" src="/images/skin/loader.gif" alt="Loader" />
 
 		<div id="CloseAjaxLoader" class="Hidden fadeIn">
 
@@ -14,3 +17,4 @@
 		</div>
 
 </div>
+<!-- /Loader  -->

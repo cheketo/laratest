@@ -994,7 +994,14 @@ $( function()
 
 			$( '#SearchFieldsForm input,select,textarea' ).val( '' );
 
-			$( '#SearchFieldsForm select' ).chosen();
+			$( '#SearchFieldsForm .chosenSelect' ).each( function()
+			{
+
+					$( this ).val( '' );
+
+					$( this ).trigger( 'chosen:updated' );
+
+			});
 
 	});
 

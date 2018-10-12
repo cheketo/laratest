@@ -1,20 +1,74 @@
-@extends('layouts.private')
+@extends( 'layouts.private' )
 
-@section('tab_title', 'Detalle Usuario')
+@section( 'tab_title', 'Editar Perfil' )
 
-@section('page_title', 'Detalle')
+@section( 'page_title' )
 
-@section('page_subtitle', 'Usuario')
+	<i class="fa fa-"></i> Perfil
+
+@endsection
+
+@section( 'page_subtitle', 'Editar' )
+
+@section( 'styles' )
+
+		{{ HTML::style( '/vendor/iCheck/all.css' ) }}
+
+@endsection
+
+@section( 'scripts' )
+
+{{ HTML::script( '/views/routes/js/main.js' ) }}
+
+{{ HTML::script( '/views/routes/js/edit.js' ) }}
+
+{{ HTML::script( '/vendor/iCheck/icheck.min.js' ) }}
+
+{{ HTML::script( '/vendor/inputmask/inputmask.min.js' ) }}
+
+{{ HTML::script( '/vendor/inputmask/jquery.inputmask.min.js' ) }}
+
+@endsection
 
 @section('content')
 
-		<div class="box box-success">
+		<div class="box box-primary">
 
-				<div class="box-header"></div>
+				<div class="box-body box-profile">
 
-				<div class="box-body"></div>
+						<img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
 
-				<div class="box-footer"></div>
+						<h3 class="profile-username text-center">Nina Mcintire</h3>
+
+						<p class="text-muted text-center">Software Engineer</p>
+
+						<ul class="list-group list-group-unbordered">
+
+								<li class="list-group-item">
+
+										<b>Followers</b> <a class="pull-right">1,322</a>
+
+								</li>
+
+								<li class="list-group-item">
+
+										<b>Following</b> <a class="pull-right">543</a>
+
+								</li>
+
+								<li class="list-group-item">
+
+										<b>Friends</b> <a class="pull-right">13,287</a>
+
+								</li>
+
+
+						</ul>
+
+						<a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+
+				</div>
+				<!-- /.box-body -->
 
 		</div>
 

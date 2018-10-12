@@ -1,4 +1,4 @@
-@extends( Auth::user() ? 'layouts.private' : 'layouts.public' );
+@extends( Auth::user() ? 'layouts.private' : 'layouts.public' )
 
 
 @section( 'tab_title', 'Página no encontrada' )

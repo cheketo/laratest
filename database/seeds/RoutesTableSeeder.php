@@ -1,11 +1,14 @@
 <?php
 
 use Illuminate\Database\Seeder;
+
 use App\Models\WebRoute;
+
 use App\Models\Middleware;
 
 class RoutesTableSeeder extends Seeder
 {
+
     /**
      * Run the database seeds.
      *
@@ -14,18 +17,62 @@ class RoutesTableSeeder extends Seeder
     public function run()
     {
 
-			/*
-			 *  Dashboard Route
-			 */
+				/*
+				 *  Login Routes
+				 */
 
-			$route 							= new WebRoute();
-			$route->route 			= '/dashboard';
-			$route->name 				= 'dashboard';
-			$route->verb 				= 'get';
-			$route->controller 	= 'DashboardController';
-			$route->method 			= 'index';
-			$route->permission 	= 'private';
-			$route->save();
+				$route 							= new WebRoute();
+ 				$route->route 			= '/';
+ 				$route->name 				= 'index';
+ 				$route->verb 				= 'get';
+ 				$route->controller 	= 'Auth\LoginController';
+ 				$route->method 			= 'showLoginForm';
+ 				$route->permission 	= 'public';
+ 				$route->save();
+
+				$route 							= new WebRoute();
+ 				$route->route 			= '/login';
+ 				$route->name 				= 'login_form';
+ 				$route->verb 				= 'get';
+ 				$route->controller 	= 'Auth\LoginController';
+ 				$route->method 			= 'showLoginForm';
+ 				$route->permission 	= 'public';
+ 				$route->save();
+
+				$middleware 				= Middleware::where( 'name', 'userexist' )->first();
+
+				$route 							= new WebRoute();
+ 				$route->route 			= '/login';
+ 				$route->name 				= 'login';
+ 				$route->verb 				= 'post';
+ 				$route->controller 	= 'Auth\LoginController';
+ 				$route->method 			= 'login';
+ 				$route->permission 	= 'public';
+ 				$route->save();
+				$route->middlewares()->attach( $middleware );
+
+				$route 							= new WebRoute();
+ 				$route->route 			= '/logout';
+ 				$route->name 				= 'logout';
+ 				$route->verb 				= 'post';
+ 				$route->controller 	= 'Auth\LoginController';
+ 				$route->method 			= 'logout';
+ 				$route->permission 	= 'public';
+ 				$route->save();
+
+
+				/*
+				 *  Dashboard Route
+				 */
+
+				$route 							= new WebRoute();
+				$route->route 			= '/dashboard';
+				$route->name 				= 'dashboard';
+				$route->verb 				= 'get';
+				$route->controller 	= 'DashboardController';
+				$route->method 			= 'index';
+				$route->permission 	= 'private';
+				$route->save();
 
 
 				/*
@@ -152,6 +199,33 @@ class RoutesTableSeeder extends Seeder
  				$route->verb 				= 'post';
  				$route->controller 	= 'UserController';
  				$route->method 			= 'activate';
+ 				$route->permission 	= 'role';
+ 				$route->save();
+
+				$route 							= new WebRoute();
+ 				$route->route 			= '/user/upload/image';
+ 				$route->name 				= 'user_upload_image';
+ 				$route->verb 				= 'post';
+ 				$route->controller 	= 'FileController';
+ 				$route->method 			= 'upoadImage';
+ 				$route->permission 	= 'role';
+ 				$route->save();
+
+				$route 							= new WebRoute();
+ 				$route->route 			= '/user/validate/user';
+ 				$route->name 				= 'user_validate_user';
+ 				$route->verb 				= 'post';
+ 				$route->controller 	= 'UserController';
+ 				$route->method 			= 'validateUser';
+ 				$route->permission 	= 'role';
+ 				$route->save();
+
+				$route 							= new WebRoute();
+ 				$route->route 			= '/user/validate/email';
+ 				$route->name 				= 'user_validate_email';
+ 				$route->verb 				= 'post';
+ 				$route->controller 	= 'UserController';
+ 				$route->method 			= 'validateEmail';
  				$route->permission 	= 'role';
  				$route->save();
 
@@ -291,6 +365,24 @@ class RoutesTableSeeder extends Seeder
  				$route->permission 	= 'role';
  				$route->save();
 
+				$route 							= new WebRoute();
+ 				$route->route 			= '/rutas/eliminar/{id}';
+ 				$route->name 				= 'route_delete';
+ 				$route->verb 				= 'post';
+ 				$route->controller 	= 'WebRouteController';
+ 				$route->method 			= 'delete';
+ 				$route->permission 	= 'role';
+ 				$route->save();
+
+				$route 							= new WebRoute();
+ 				$route->route 			= '/rutas/activar/{id}';
+ 				$route->name 				= 'route_activate';
+ 				$route->verb 				= 'post';
+ 				$route->controller 	= 'WebRouteController';
+ 				$route->method 			= 'activate';
+ 				$route->permission 	= 'role';
+ 				$route->save();
+
 
 				/*
 				 *  Menu Routes
@@ -426,35 +518,21 @@ class RoutesTableSeeder extends Seeder
 				$route->permission 	= 'role';
 				$route->save();
 
-
-				/*
-				 *  Ajax Routes
-				 */
-
 				$route 							= new WebRoute();
- 				$route->route 			= '/user/upload/image';
- 				$route->name 				= 'user_upload_image';
+ 				$route->route 			= '/middlewares/eliminar/{id}';
+ 				$route->name 				= 'middleware_delete';
  				$route->verb 				= 'post';
- 				$route->controller 	= 'FileController';
- 				$route->method 			= 'upoadImage';
+ 				$route->controller 	= 'MiddlewareController';
+ 				$route->method 			= 'delete';
  				$route->permission 	= 'role';
  				$route->save();
 
 				$route 							= new WebRoute();
- 				$route->route 			= '/user/validate/user';
- 				$route->name 				= 'user_validate_user';
+ 				$route->route 			= '/middlewares/activar/{id}';
+ 				$route->name 				= 'middleware_activate';
  				$route->verb 				= 'post';
- 				$route->controller 	= 'UserController';
- 				$route->method 			= 'validateUser';
- 				$route->permission 	= 'role';
- 				$route->save();
-
-				$route 							= new WebRoute();
- 				$route->route 			= '/user/validate/email';
- 				$route->name 				= 'user_validate_email';
- 				$route->verb 				= 'post';
- 				$route->controller 	= 'UserController';
- 				$route->method 			= 'validateEmail';
+ 				$route->controller 	= 'MiddlewareController';
+ 				$route->method 			= 'activate';
  				$route->permission 	= 'role';
  				$route->save();
 
@@ -467,23 +545,6 @@ class RoutesTableSeeder extends Seeder
  				$route->permission 	= 'role';
  				$route->save();
 
-				// DB::table('routes')->insert([
-        //     'route' => '/pepe/{id}',
-				// 		'name' => 'editpepe',
-				// 		'verb' => 'get',
-				// 		'controller' => 'UserController',
-				// 		'method' => 'editpepe',
-				// 		'permission'=> 'role',
-        // ]);
-
-				// $routes = "<?php\n";
-				// // $routes = $routes . "Route::get('/pepe/{id}', 'UserController@editpepe')->name('editpepe')->middleware('checkpermission');\n";
-				// $routes = $routes . "Route::view('/pepa/{id}', 'dashboard')->name('editpepa');\n";
-				// $routes = $routes . "Route::get('/pepe/{id}', 'UserController@editpepe')->name('editpepe')->middleware('checkpermission:3');\n";
-				// // file_put_contents("routes/web_public.php", $route, FILE_APPEND);
-				//
-				// $webfile = fopen("routes/web_public.php", "w") or die("Unable to open file!");
-				// fwrite($webfile, $routes);
-				// fclose($webfile);
     }
+
 }

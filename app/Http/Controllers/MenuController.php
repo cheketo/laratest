@@ -13,13 +13,6 @@ use App\Models\WebRoute;
 class MenuController extends Controller
 {
 
-		public function __construct()
-		{
-
-				$this->middleware( 'auth' );
-
-		}
-
 		public static function getSelectValues( $where = array(), $isNull = array(), $isNotNull = array() )
 		{
 
