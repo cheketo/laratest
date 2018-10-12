@@ -153,9 +153,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show( $id )
+    public function show( $user )
     {
-        //
+
+				$show = User::where( 'user', '=', $user )->first();
+
+        return view( 'users.show', compact( 'show' ) );
+
     }
 
     /**

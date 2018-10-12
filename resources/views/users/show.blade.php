@@ -1,75 +1,129 @@
 @extends( 'layouts.private' )
 
-@section( 'tab_title', 'Editar Perfil' )
+@section( 'tab_title', 'Detalles de Usuario' )
 
 @section( 'page_title' )
 
-	<i class="fa fa-"></i> Perfil
+		<i class="fa fa-address-card"></i> {{ $show->first_name }} {{ $show->last_name }} ( {{ $show->user }} )
 
 @endsection
 
-@section( 'page_subtitle', 'Editar' )
+@section( 'page_subtitle', 'Detalles de Usuario' )
 
 @section( 'styles' )
 
-		{{ HTML::style( '/vendor/iCheck/all.css' ) }}
+		{{ HTML::style( '/views/users/css/show.css' ) }}
 
 @endsection
 
 @section( 'scripts' )
 
-{{ HTML::script( '/views/routes/js/main.js' ) }}
+	{{ HTML::script( '/views/users/js/main.js' ) }}
 
-{{ HTML::script( '/views/routes/js/edit.js' ) }}
-
-{{ HTML::script( '/vendor/iCheck/icheck.min.js' ) }}
-
-{{ HTML::script( '/vendor/inputmask/inputmask.min.js' ) }}
-
-{{ HTML::script( '/vendor/inputmask/jquery.inputmask.min.js' ) }}
+	{{ HTML::script( '/views/users/js/show.js' ) }}
 
 @endsection
 
 @section('content')
 
-		<div class="box box-primary">
+		<br>
 
-				<div class="box-body box-profile">
+		<div class="box"> <!--box-success-->
 
-						<img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+		    <div class="box-body">
 
-						<h3 class="profile-username text-center">Nina Mcintire</h3>
+			      <div class="row main-wrapper profile-section">
 
-						<p class="text-muted text-center">Software Engineer</p>
+				    		<div class="col-md-5 profile-user-info">
 
-						<ul class="list-group list-group-unbordered">
+										<div class="">
 
-								<li class="list-group-item">
+						            <img class="profile-img img-responsive" src="{{ $show->image->route }}" alt="User profile picture">
 
-										<b>Followers</b> <a class="pull-right">1,322</a>
+						            <h3 class="profile-username text-center">{{ $show->first_name }} {{ $show->last_name }}</h3>
 
-								</li>
+						            <p class="text-muted text-center">{{ $show->user }}</p>
 
-								<li class="list-group-item">
+					          </div>
 
-										<b>Following</b> <a class="pull-right">543</a>
+								</div>
 
-								</li>
+								<div class="col-md-7 profile-user-misc">
 
-								<li class="list-group-item">
+										<div class="box-body">
 
-										<b>Friends</b> <a class="pull-right">13,287</a>
+												<span class="profile-titles"><strong><i class="fa fa-bookmark"></i> Nombre y Apellido</strong></span>
 
-								</li>
+												<p>
 
+														<span class="badge bg-blue">{{ $show->first_name }} {{ $show->last_name }}</span>
 
-						</ul>
+												</p>
 
-						<a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+												<hr>
 
-				</div>
-				<!-- /.box-body -->
+												<span class="profile-titles"><strong><i class="fa fa-envelope"></i> Email</strong></span>
 
-		</div>
+												<p>
+
+														<span class="badge bg-aqua">{{ $show->email }}</span>
+
+												</p>
+
+												<hr>
+
+												<span class="profile-titles"><strong><i class="fa fa-user"></i> Usuario</strong></span>
+
+												<p>
+
+														<span class="badge bg-green">{{ $show->user }}</span>
+
+												</p>
+
+												<hr>
+
+												<span class="profile-titles"><strong><i class="fa fa-lock"></i> Perfil</strong></span>
+
+												<p>
+
+														@foreach( $show->roles as $role )
+
+																<span class="badge bg-purple">{{ $role->name }}</span>
+
+														@endforeach
+
+												</p>
+
+												<hr>
+
+												<span class="profile-titles"><strong><i class="fa fa-history"></i> Última Conexión</strong></span>
+
+												<p>
+
+														<span class="badge bg-maroon">{{ $show->created_at }}<!--12/10/18|19:52:52Hs.--></span>
+
+												</p>
+
+												<hr>
+
+												<span class="profile-titles"><strong><i class="fa fa-clock"></i> Fecha de Creación</strong></span>
+
+												<p>
+
+														<span class="badge bg-brown">{{ $show->created_at }}<!--12/10/18|19:52:52Hs.--></span>
+
+												</p>
+
+												<hr>
+
+										</div>
+
+								</div>
+
+						</div>
+
+		    </div><!-- /.box-body -->
+
+	  </div>
 
 @endsection

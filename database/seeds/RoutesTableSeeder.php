@@ -155,7 +155,7 @@ class RoutesTableSeeder extends Seeder
  				$route->save();
 
 				$route 							= new WebRoute();
-				$route->route 			= '/usuarios/{id}';
+				$route->route 			= '/usuarios/{user}';
 				$route->name 				= 'user_show';
 				$route->verb 				= 'get';
 				$route->controller 	= 'UserController';

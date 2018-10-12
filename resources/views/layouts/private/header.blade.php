@@ -122,7 +122,7 @@
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-left">
-										<a href="#" class="btn btn-info btn-flat">Mi Perfil</a>
+										<a href="/usuarios/{{ auth()->user()->user }}" class="btn btn-info btn-flat">Mi Perfil</a>
 									</div>
 									<div class="pull-right">
 										<form method="POST" action="{{ route( 'logout' ) }}" id="headerLogoutForm">
