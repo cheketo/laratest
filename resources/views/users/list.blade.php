@@ -395,17 +395,17 @@
 								<div class="row">
 
 										<!-- Change Regs Per View -->
-										<div class="col-xs-12 col-sm-1 col-md-1 txC">
+										<div class="col-xs-5 col-sm-1 col-md-1 txC">
 
 												<div style="max-width:100px;" class="Hidden" id="RegsPerViewDiv">
 
-														{{ Form::chosen( 'regsperview', [ "5" => 5, "10" => 10, "25" => 25, "50" => 50, "100" => 100 ] , $results->perPage(), [ 'placeholder' => 'Seleccione los perfiles.', 'extra' => ' tabindex="10"' ] ) }}
+														{{ Form::chosen( 'regsperview', [ "5" => 5, "10" => 10, "25" => 25, "50" => 50, "100" => 100 ] , $results->perPage(), [ 'extra' => ' tabindex="10"' ] ) }}
 
 												</div>
 
 												<div id="RegsPerViewButton">
 
-														<button type="button" class="btn btn-blue hint--top hint--bounce hint--info" aria-label="Cambiar la cantidad de registros que se muestran"><i class="fa fa-list-alt "></i></button>
+														<button type="button" class="btn btn-github hint--top hint--bounce" aria-label="Cambiar la cantidad de registros que se muestran"><i class="fa fa-list-alt "></i></button>
 
 												</div>
 
@@ -414,7 +414,7 @@
 
 
 										<!-- Total Rows -->
-										<div class="col-xs-12 col-sm-2 col-md-2">
+										<div class="col-xs-7 col-sm-2 col-md-2">
 
 												<span class="pull-right" style="margin:0px;padding:0px;margin-top:5px;">
 
@@ -456,7 +456,7 @@
 																</div>
 
 																<div class="col-xs-4 txL" style="margin-left:0px;padding-left:2px;">
-																		<button type="button" url="" id="go_to_page_button" name="button" class="GoToPageBtn btn btn-sm btn-default" style="margin:0px;">Ir</button>
+																		<button type="button" url="" id="go_to_page_button" name="button" class="GoToPageBtn btn btn-sm btn-github" style="margin:0px;">Ir</button>
 																</div>
 
 														{!! Form::close() !!}

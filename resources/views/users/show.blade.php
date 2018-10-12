@@ -36,9 +36,9 @@
 
 				    		<div class="col-md-5 profile-user-info">
 
-										<div class="">
+										<div style="margin-top:50px;" class="">
 
-						            <img class="profile-img img-responsive" src="{{ $show->image->route }}" alt="User profile picture">
+						            <img class="profile-img img-responsive" src="{{ $show->image->route }}">
 
 						            <h3 class="profile-username text-center">{{ $show->first_name }} {{ $show->last_name }}</h3>
 
@@ -82,7 +82,7 @@
 
 												<hr>
 
-												<span class="profile-titles"><strong><i class="fa fa-lock"></i> Perfil</strong></span>
+												<span class="profile-titles"><strong><i class="fa fa-lock"></i> Perfiles</strong></span>
 
 												<p>
 
