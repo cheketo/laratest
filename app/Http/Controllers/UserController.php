@@ -6,6 +6,8 @@ use Auth;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Hash;
+
 use App\Models\User;
 
 use App\Models\Person;
@@ -188,6 +190,7 @@ class UserController extends Controller
      */
     public function update( Request $request, $id )
     {
+
 				if( $request->ajax() )
 				{
 
@@ -196,41 +199,60 @@ class UserController extends Controller
 						if( $user )
 						{
 
-								$user->user 			= $request->user;
-
-								if( $request->password )
-
-										$user->password 	= bcrypt( $request->password );
-
-								$user->email 			= $request->email;
-
-								$user->last_name 	= $request->last_name;
-
-								$user->first_name = $request->first_name;
-
-								if( strpos( $request->newimage, '/') === false )
+								if( $request->user )
 								{
 
-										$image 				= File::find( $request->newimage );
-
-								}else{
-
-										$image 				= FileController::findOrCreate( $request->newimage );
+										$user->user 			= $request->user;
 
 								}
 
-								$user->image_id = $image->id;
+								if( $request->password )
+								{
+
+										$user->password 	= bcrypt( $request->password );
+
+								}
+
+								if( $request->email )
+								{
+
+										$user->email 			= $request->email;
+
+								}
+
+								if( $request->last_name )
+								{
+
+										$user->last_name 	= $request->last_name;
+
+								}
+
+								if( $request->first_name )
+								{
+
+										$user->first_name = $request->first_name;
+
+								}
+
+								if( $request->newimage )
+								{
+
+										if( strpos( $request->newimage, '/' ) === false )
+										{
+
+												$image 				= File::find( $request->newimage );
+
+										}else{
+
+												$image 				= FileController::findOrCreate( $request->newimage );
+
+										}
+
+										$user->image_id = $image->id;
+
+								}
 
 								$user->update();
-
-								// $roles 						= Role::whereIn( 'id', explode( ',', $request->roles ) )->get();
-
-								// foreach( $roles as $role )
-								// {
-								//
-								// 		$user->roles()->attach( $role );
-								//
-								// }
 
 								$user->roles()->sync( explode( ',', $request->roles ) );
 
@@ -249,6 +271,50 @@ class UserController extends Controller
 										'valid' => false
 
 								], 404);
+
+						}
+
+				}
+
+    }
+
+		/**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function changePassword( Request $request )
+    {
+
+				if( $request->ajax() )
+				{
+
+						$user = auth()->user();
+
+						if( Hash::check($request->password_old, auth()->user()->password) && $request->password == $request->password_confirm  )
+						{
+
+								$user->password 	= bcrypt( $request->password );
+
+								$user->update();
+
+								return response()->json(
+								[
+
+										'valid' => true
+
+								]);
+
+						}else{
+
+								return response()->json(
+								[
+
+										'valid' => false,
+
+								]);
 
 						}
 
@@ -371,36 +437,57 @@ class UserController extends Controller
 		public function validateEmail( Request $request )
 		{
 
-			if( $request->ajax() )
-			{
+				if( $request->ajax() )
+				{
 
-					$email = request()->input( 'email' );
+						$email = request()->input( 'email' );
 
-					$results = User::where( [ 'email' => $email ] );
+						$results = User::where( [ 'email' => $email ] );
 
-					if( request()->input( 'actualvalue' ) )
+						if( request()->input( 'actualvalue' ) )
 
-							$results->where( 'email', '!=' , request()->input( 'actualvalue' ) );
+								$results->where( 'email', '!=' , request()->input( 'actualvalue' ) );
 
-					$results->get();
+						$results->get();
 
-					$valid = true;
+						$valid = true;
 
-					if( $results->count() > 0 )
-					{
+						if( $results->count() > 0 )
+						{
 
-							$valid = false;
+								$valid = false;
 
-					}
+						}
 
-					return response()->json(
-					[
+						return response()->json(
+						[
 
-							'valid' => $valid
+								'valid' => $valid
 
-					] );
+						] );
 
-			}
+				}
+
+		}
+
+		public function changeColor( Request $request, $skin )
+		{
+
+				if( $request->ajax() )
+				{
+
+						auth()->user()->skin = $skin;
+
+						auth()->user()->save();
+
+						return response()->json(
+						[
+
+								'valid' => true
+
+						] );
+
+				}
 
 		}
 
@@ -475,6 +562,52 @@ class UserController extends Controller
 				return false;
 
 		}
+
+		// public function hasRoute( $route )
+		// {
+		//
+		// 		if( !is_object( $route ) )
+		// 		{
+		//
+		// 				if( is_numeric( $route ) )
+		// 				{
+		//
+		// 						$route = WebRoute::find( $route );
+		//
+		// 				}else{
+		//
+		// 						if( strpos( $route, '/' ) )
+		// 						{
+		//
+		// 								$route = WebRoute::route( $route )->status( 'A' )->first();
+		//
+		// 						}else{
+		//
+		// 								$route = WebRoute::name( $route )->status( 'A' )->first();
+		//
+		// 						}
+		//
+		// 				}
+		//
+		// 		}
+		//
+		// 		if( is_object( $route ) )
+		// 		{
+		//
+		// 				foreach( $this->roles as $role )
+		// 				{
+		//
+		// 						return $route->hasRole( $role );
+		//
+		// 				}
+		//
+		// 		}else{
+		//
+		// 				return false;
+		//
+		// 		}
+		//
+		// }
 
 		public static function getUserDefaultImages()
 		{

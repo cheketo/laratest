@@ -1,10 +1,16 @@
 @extends( 'layouts.private' )
 
-@section( 'tab_title', 'Listado de Alumnos' )
+@section( 'tab_title', session( 'active_route' )->menus[ 0 ]->title_tab )
 
-@section( 'page_title', 'Listado' )
+@section( 'page_title' )
 
-@section( 'page_subtitle', 'Alumnos' )
+	<i class="{{ session( 'active_route' )->menus[ 0 ]->icon }}"></i> {{ session( 'active_route' )->menus[ 0 ]->title_menu }}
+
+@endsection
+
+
+@section( 'page_subtitle', session( 'active_route' )->menus[ 0 ]->title_page )
+
 
 @section( 'styles' )
 
@@ -186,8 +192,8 @@
 
 																@endif
 
-
 																{{ Form::chosen( 'career', App\Http\Controllers\CareerController::getSelectValues(), app( 'request' )->input( 'career' ), [ 'placeholder' => 'Carrera' ] ) }}
+
 														</div>
 
 												</div>
@@ -364,15 +370,32 @@
 																								<button type="button" class="btn bg-navy ExpandButton" id="expand_{{$element->nro_inscripcion}}"><i class="fa fa-plus"></i></button>
 																						</a>
 
-																						<!-- Show Button -->
-																						<a class="hint--bottom hint--bounce" aria-label="Ver Detalle" href="/alumnos/{{$element->nro_inscripcion}}" id="view_{{$element->nro_inscripcion}}">
-																								<button type="button" class="btn btn-github"><i class="fa fa-eye"></i></button>
-																						</a>
+																						@if( auth()->user()->hasRoute( 'student_show' ) )
 
-																						<!-- Cuenta Corriente Button -->
-																						<a href="/alumnos/cuentacorriente/{{$element->nro_inscripcion}}/" class="hint--bottom-left hint--bounce hint--success" aria-label="Cuenta Corriente">
-																								<button type="button" class="btn btn-green"><i class="fa fa-dollar"></i></button>
-																						</a>
+																								<!-- Show Button -->
+																								<a class="hint--bottom hint--bounce" aria-label="Ver Detalle" href="/alumnos/{{$element->nro_inscripcion}}" id="view_{{$element->nro_inscripcion}}">
+																										<button type="button" class="btn btn-github"><i class="fa fa-eye"></i></button>
+																								</a>
+
+																						@endif
+
+																						@if( auth()->user()->hasRoute( 'student_enrole' ) )
+
+																								<!-- Enrole Button -->
+																								<a class="hint--bottom hint--bounce hint--info" aria-label="Inscribir a Carrera" href="/alumnos/inscripcion/{{ $element->student->id }}" id="enrole_{{ $element->student->id }}">
+																										<button type="button" class="btn btn-primary"><i class="fas fa-address-card"></i></button>
+																								</a>
+
+																						@endif
+
+																						@if( auth()->user()->hasRoute( 'student_account' ) )
+
+																								<!-- Cuenta Corriente Button -->
+																								<a href="/alumnos/cuentacorriente/{{ $element->student->id }}/" class="hint--bottom-left hint--bounce hint--success" aria-label="Cuenta Corriente">
+																										<button type="button" class="btn btn-green"><i class="fa fa-dollar"></i></button>
+																								</a>
+
+																						@endif
 
 
 

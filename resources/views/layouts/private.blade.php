@@ -4,7 +4,7 @@
 
 @section( 'body' )
 
-		<body class="hold-transition skin-blue sidebar-mini fixed">
+		<body class="hold-transition {{ auth()->user()->skin }} sidebar-mini fixed">
 
 				@include( 'layouts.private.loader' )
 

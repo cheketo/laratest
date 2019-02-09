@@ -20,7 +20,7 @@ class User extends Authenticatable
      */
 
     protected $fillable = [
-        'first_name', 'last_name', 'user', 'email', 'password', 'status' , 'image_id'
+        'first_name', 'last_name', 'user', 'email', 'password', 'status' , 'image_id', 'skin'
     ];
 
     /**
@@ -98,6 +98,55 @@ class User extends Authenticatable
 				{
 
 						return true;
+
+				}
+
+				return false;
+
+		}
+
+		public function hasRoute( $route )
+		{
+
+				if( !is_object( $route ) )
+				{
+
+						if( is_numeric( $route ) )
+						{
+
+								$route = WebRoute::id( $route )->status( 'A' )->first();
+
+						}else{
+
+								if( strpos( $route, '/' ) )
+								{
+
+										$route = WebRoute::route( $route )->status( 'A' )->first();
+
+								}else{
+
+										$route = WebRoute::name( $route )->status( 'A' )->first();
+
+								}
+
+						}
+
+				}
+
+				if( is_object( $route ) )
+				{
+
+						foreach( $this->roles as $role )
+						{
+
+								if( $route->hasRole( $role ) )
+								{
+
+										return true;
+
+								}
+
+						}
 
 				}
 

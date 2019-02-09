@@ -12,3 +12,5 @@ yarn-error.log
 .env
 *.svg
 public/*.svg
+
+!/vendor/laravel/framework

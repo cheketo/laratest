@@ -56,6 +56,21 @@ return [
             'engine' => null,
         ],
 
+				'posgrado_aux' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_SECOND', '127.0.0.1'),
+            'port' => env('DB_PORT_SECOND', '3306'),
+            'database' => env('DB_DATABASE_SECOND', 'forge'),
+            'username' => env('DB_USERNAME_SECOND', 'forge'),
+            'password' => env('DB_PASSWORD_SECOND', ''),
+            'unix_socket' => env('DB_SOCKET_SECOND', ''),
+						'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),
@@ -83,8 +98,8 @@ return [
 				'informix' => [
 						'driver'          => 'informix',
 		        'host'            => env('DB_IFX_HOST', '10.1.1.14'),
-		        // 'database'        => env('DB_IFX_DATABASE', 'siu_grado_cap2'),
-						'database'        => env('DB_IFX_DATABASE', 'siu_postmig261_cap'),
+		        // 'database'        => env('DB_IFX_DATABASE', 'siu_postmig261_cap'),
+						'database'        => env('DB_IFX_DATABASE', 'siu_postmig261_cap2'),
 		        'username'        => env('DB_IFX_USERNAME', 'dba'),
 		        'password'        => env('DB_IFX_PASSWORD', 'dba'),
 		        'service'         => env('DB_IFX_SERVICE', '1523'),

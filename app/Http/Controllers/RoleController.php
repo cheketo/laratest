@@ -120,9 +120,13 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show( $id )
     {
-        //
+
+				$show = Role::find( $id );
+
+				return view( 'roles.show', compact( 'show' ) );
+
     }
 
     /**
@@ -134,9 +138,9 @@ class RoleController extends Controller
     public function edit( $id )
     {
 
-			$edit = Role::find( $id );
+				$edit = Role::find( $id );
 
-			return view( 'roles.edit', [ 'edit' => $edit ] );
+				return view( 'roles.edit', [ 'edit' => $edit ] );
 
     }
 

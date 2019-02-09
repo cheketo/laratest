@@ -114,15 +114,15 @@
 									<img src="{{ auth()->user()->image->route }}" class="img-circle" alt="User Image">
 
 									<p>
-										{{ auth()->user()->user }} - {{ auth()->user()->email }}
-										<small>Member since Nov. 2012</small>
+										{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
+										<small>{{ auth()->user()->user }}</small>
 									</p>
 								</li>
 
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-left">
-										<a href="/usuarios/{{ auth()->user()->user }}"><span class="btn btn-info btn-flat">Mi Perfil</span></a>
+										<a href="{{ route( 'user_profile' ) }}"><span class="btn btn-info bg-blue btn-flat"><i class="fa fa-address-card"></i> Mi Perfil</span></a>
 									</div>
 									<div class="pull-right">
 										<form method="POST" action="{{ route( 'logout' ) }}" id="headerLogoutForm">

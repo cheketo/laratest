@@ -560,12 +560,12 @@ function validateDivChange()
 function goBack()
 {
 
-	$( ".BtnCancel" ).click( function()
-	{
+		$( '.BtnCancel' ).click( function()
+		{
 
-			window.history.back();
+				window.history.back();
 
-	});
+		});
 
 }
 
@@ -798,12 +798,23 @@ function askAndSubmit( route, target, qtext = "¿Desea guardar la informaci&oacu
 
 										console.log( response );
 
+										return false;
+
 								}
 
 								var success		= function( response )
 								{
 
-										document.location = target;
+										if( target && target != '' )
+										{
+
+												document.location = target;
+
+										}else{
+
+												return true;
+
+										}
 
 								}
 

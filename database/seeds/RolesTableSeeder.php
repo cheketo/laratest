@@ -1,11 +1,14 @@
 <?php
 
 use App\Models\WebRoute;
+
 use App\Models\Role;
+
 use Illuminate\Database\Seeder;
 
 class RolesTableSeeder extends Seeder
 {
+
     /**
      * Run the database seeds.
      *
@@ -20,7 +23,7 @@ class RolesTableSeeder extends Seeder
 				$role->name = 'Administrador';
 				$role->description = 'Perfil para administradores del sistema';
 				$role->save();
-				$role->routes()->attach($routes);
+				$role->routes()->attach( $routes );
 
 				$role = new Role();
 				$role->name = 'Director';
@@ -37,6 +40,6 @@ class RolesTableSeeder extends Seeder
 				$role->description = 'Perfil para alumnos del sistema';
 				$role->save();
 
-
     }
+
 }

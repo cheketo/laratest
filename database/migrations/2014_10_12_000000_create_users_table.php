@@ -35,6 +35,8 @@ class CreateUsersTable extends Migration
 
             $table->char( 'status', 1 )->default( 'A' );
 
+						$table->string( 'skin' )->default( 'skin-blue' );
+
             $table->softDeletes();
 
             $table->rememberToken();

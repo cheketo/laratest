@@ -4,7 +4,7 @@
 
 @section( 'page_title' )
 
-		<i class="fa fa-address-card"></i> {{ $show->first_name }} {{ $show->last_name }} ( {{ $show->user }} )
+		<i class="fa fa-address-card"></i> {{ $show->first_name }} {{ $show->last_name }} ({{ $show->user }})
 
 @endsection
 
@@ -100,7 +100,7 @@
 
 												<p>
 
-														<span class="badge bg-maroon">{{ $show->created_at }}<!--12/10/18|19:52:52Hs.--></span>
+														<span class="badge bg-brown">{{ $show->updated_at->format( 'd/m/Y | H:i:s' ) }} Hs.<!--12/10/18|19:52:52Hs.--></span>
 
 												</p>
 
@@ -110,7 +110,7 @@
 
 												<p>
 
-														<span class="badge bg-brown">{{ $show->created_at }}<!--12/10/18|19:52:52Hs.--></span>
+														<span class="badge bg-navy">{{ $show->created_at->format( 'd/m/Y | H:i:s' ) }} Hs.</span>
 
 												</p>
 

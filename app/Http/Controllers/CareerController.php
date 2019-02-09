@@ -6,17 +6,12 @@ use Auth;
 
 use Illuminate\Http\Request;
 
+use App\Models\Guarani\Career as GuaraniCareer;
+
 use App\Models\Career;
 
 class CareerController extends Controller
 {
-
-		public function __construct()
-		{
-
-				$this->middleware( 'auth' );
-
-		}
 
     /**
      * Display a listing of the resource.
@@ -44,7 +39,7 @@ class CareerController extends Controller
 
  				}else{
 
- 						$orderField = 'sga_alumnos.nro_inscripcion';
+ 						$orderField = 'careers.code';
 
  				}
 
@@ -59,98 +54,30 @@ class CareerController extends Controller
 
  				}
 
- 				$matchThese = array();
-
- 				if( $request->get( 'first_name' ) )
- 				{
-
- 						$matchThese[] = [ 'LOWER(sga_personas.nombres)', 'LIKE', '%' . strtolower( $request->get( 'first_name' ) ) . '%' ];
-
- 				}
-
- 				if( $request->get( 'last_name' ) )
- 				{
-
- 						$matchThese[] = [ 'LOWER(sga_personas.apellido)', 'LIKE', '%' . strtolower( $request->get( 'last_name' ) ) . '%' ];
-
- 				}
-
- 				if( $request->get( 'inscription_id' ) )
- 				{
-
- 						$matchThese[] = [ 'sga_personas.nro_inscripcion', 'LIKE', '%' . strtoupper( $request->get( 'inscription_id' ) ) . '%' ];
-
- 				}
-
- 				if( $request->get( 'document_id' ) )
- 				{
-
- 						$matchThese[] = [ 'sga_personas.nro_documento', '=', $request->get( 'document_id' ) ];
-
- 				}
-
- 				if( $request->get( 'inscription_date' ) )
- 				{
-
- 						$matchThese[] = [ 'sga_personas.fecha_inscripcion', '>=', implode( '-', array_reverse( explode( '/', $request->get( 'inscription_date' ) ) ) ) ];
-
- 				}
-
- 				$results = Person::select(
- 																		'sga_alumnos.nro_inscripcion',
- 																		'sga_alumnos.plan',
- 																		'sga_alumnos.fin_vigencia_plan',
- 																		'sga_alumnos.calidad',
- 																		'sga_alumnos.cnt_readmisiones',
- 																		'sga_alumnos.regular',
- 																		'sga_alumnos.fecha_ingreso',
- 																		'sga_alumnos.sede',
- 																		'sga_alumnos.legajo',
- 																		'sga_alumnos.unidad_academica',
- 																		'sga_alumnos.carrera',
- 																		'sga_personas.nombres',
- 																		'sga_personas.apellido',
- 																		'sga_personas.nro_documento',
- 																		'sga_personas.fecha_inscripcion',
- 																		'sga_personas.fecha_nacimiento',
- 																		'COUNT( sga_alumnos.carrera ) as total_carreras'
- 																	)
- 														->join( 'sga_alumnos', 'sga_personas.nro_inscripcion', '=', 'sga_alumnos.nro_inscripcion' )
- 														->where( $matchThese )
- 														->groupBy(
- 																		'sga_alumnos.nro_inscripcion','sga_alumnos.plan',
- 																		'sga_alumnos.fin_vigencia_plan',
- 																		'sga_alumnos.calidad',
- 																		'sga_alumnos.cnt_readmisiones',
- 																		'sga_alumnos.regular',
- 																		'sga_alumnos.fecha_ingreso',
- 																		'sga_alumnos.sede',
- 																		'sga_alumnos.legajo',
- 																		'sga_alumnos.unidad_academica',
- 																		'sga_alumnos.carrera',
- 																		'sga_personas.nombres',
- 																		'sga_personas.apellido',
- 																		'sga_personas.nro_documento',
- 																		'sga_personas.fecha_inscripcion',
- 																		'sga_personas.fecha_nacimiento'
- 																		)
- 														->orderBy( $orderField, $orderMode )
- 														->paginate( $PerPage );
+ 				$results = Career::name( $request->get( 'name' ) )
+													->code( $request->get( 'code' ) )
+													->orderBy( $orderField, $orderMode )
+													->paginate( $PerPage );
  														// ->toSql();
 
 
 
  				// dd( $results );
 
-         return view( 'students.list', compact( 'results' ) );
+				$formRoute 	= 'career_list';
 
-     }
+				$viewPath 	= 'careers';
+
+				return view( 'layouts.private.list', compact( 'results', 'formRoute', 'viewPath' ) );
+    		// return view( 'careers.list', compact( 'results' ) );
+
+		}
 
 		public static function getSelectValues()
 		{
 				$careers = array();
 
-				foreach( Career::all() as $career)
+				foreach( GuaraniCareer::all() as $career)
 				{
 
 						$careers[ $career->carrera ] = $career->nombre_reducido;
@@ -161,6 +88,102 @@ class CareerController extends Controller
 
 		}
 
+		public static function insertNewCareers()
+		{
 
+				$careers = GuaraniCareer::all();
+
+				foreach( $careers as $guaraniCareer )
+				{
+
+						$career = Career::codeEquals( $guaraniCareer->carrera )->first();
+
+						if( !$career )
+						{
+
+								$career = new Career();
+
+								$career->code = $guaraniCareer->carrera;
+
+								$career->name = $guaraniCareer->nombre;
+
+								$career->short_name = $guaraniCareer->nombre_reducido;
+
+								$career->status = $guaraniCareer->estado;
+
+								if( $guaraniCareer->carrera == 'PRDOC' || $guaraniCareer->carrera == 'DOCTO' )
+								{
+
+										$career->group_id = 2;
+
+								}else{
+
+										$firstLetter = substr( trim( $guaraniCareer->carrera ), 0, 1 );
+
+										switch( strtoupper( $firstLetter ) )
+										{
+
+											case 'M':
+
+													$career->group_id = 1;
+
+											break;
+
+											case 'C':
+
+													$career->group_id = 3;
+
+											break;
+
+											case 'E':
+
+													$career->group_id = 4;
+
+											break;
+
+											case 'P':
+
+													$career->group_id = 5;
+
+											break;
+
+											case 'A':
+
+													$career->group_id = 6;
+
+											break;
+
+										}
+
+								}
+
+								$career->save();
+
+						}
+
+				}
+
+		}
+
+		public static function getCareer( $guaraniCareer )
+		{
+
+				if( $guaraniCareer )
+				{
+
+						$career = Career::codeEquals( $guaraniCareer )->first();
+
+						if( $career )
+						{
+
+								return $career;
+
+						}
+
+				}
+
+				return false;
+
+		}
 
 }

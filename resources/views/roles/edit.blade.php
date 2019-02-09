@@ -51,7 +51,7 @@
 														<h4 class="subTitleB"><i class="fa fa-list-alt"></i> Descripción {{ Form::hint( 'Descripción que explica que permisos otorga y a que tipo de usuario está dirigido' ) }}</h4>
 
 														<div class="form-group">
-																<textarea name="description" id="description" class="form-control" placeholder="Descripción del Perfil" tabindex="2" validateEmpty="El nombre es obligatorio." rows="8" cols="80">{{ $edit->description }}</textarea>
+																<textarea name="description" id="description" class="form-control" placeholder="Descripción del Perfil" tabindex="2" validateEmpty="La descripción es obligatoria." rows="8" cols="80">{{ $edit->description }}</textarea>
 														</div>
 
 														<h4 class="subTitleB"><i class="fa fa-key"></i> Permisos {{ Form::hint( 'Permisos que otorga este perfil' ) }}</h4>

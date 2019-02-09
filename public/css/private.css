@@ -450,6 +450,10 @@ html {
 	  -ms-flex-wrap: nowrap;
 	  flex-wrap: nowrap; }
 
+	.cursor-pointer {
+		cursor:pointer;
+	}
+
 /* WINDOW POP UP */
 /* .window {
   padding:2%;

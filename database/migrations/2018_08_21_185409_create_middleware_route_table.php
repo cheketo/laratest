@@ -20,10 +20,15 @@ class CreateMiddlewareRouteTable extends Migration
 				{
 
 						$table->integer( 'route_id' )->unsigned()->index();
+
 						$table->foreign( 'route_id' )->references( 'id' )->on( 'routes' )->onDelete( 'cascade' );
+
 						$table->integer( 'middleware_id' )->unsigned()->index();
+
 						$table->foreign( 'middleware_id' )->references( 'id' )->on( 'middlewares' )->onDelete( 'cascade' );
+
 						$table->integer( 'position' )->unsigned()->default( '0' );
+						
 						$table->timestamps();
 
         });

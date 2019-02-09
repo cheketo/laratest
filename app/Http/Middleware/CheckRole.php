@@ -45,6 +45,6 @@ class CheckRole
             // dd($request->session());
             // return back()->withErrors(['email' => $current])->withInput();
         // }
-        // return $next($request);
+        return $next($request);
     }
 }

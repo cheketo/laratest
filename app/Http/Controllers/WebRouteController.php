@@ -10,14 +10,10 @@ use App\Models\WebRoute;
 
 use App\Models\Middleware;
 
+use App\Models\User;
+
 class WebRouteController extends Controller
 {
-
-		public function __construct()
-		{
-
-		}
-
 
 		public static function getSelectValues( $where = array(), $isNull = array(), $isNotNull = array() )
 		{
@@ -42,7 +38,7 @@ class WebRouteController extends Controller
 	   *
 	   * @return \Illuminate\Http\Response
 	   */
-	  public function index( Request $request)
+	  public function index( Request $request )
 	  {
 
 				if( $request->get( 'perpage' ) )
@@ -214,7 +210,11 @@ class WebRouteController extends Controller
 	   */
 	  public function show($id)
 	  {
-	      //
+
+				$show = WebRoute::find( $id );
+
+				return view( 'routes.show', compact( 'show' ) );
+
 	  }
 
 	  /**

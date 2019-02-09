@@ -72,8 +72,6 @@
 
 				@foreach( $options->keyBy( $fieldKey ) as $key => $option )
 
-						@php  @endphp
-
 						<option value="{{ $key }}" @if( $key == $value ) selected="selected" @endif >{{ $option[ $fieldValue ] }}</option>
 
 				@endforeach

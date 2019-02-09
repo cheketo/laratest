@@ -72,6 +72,53 @@ class WebRoute extends Model
 
 		}
 
+		public function hasRole( $role )
+		{
+
+				if( !is_object( $role ) )
+				{
+
+						if( is_numeric( $role ) )
+						{
+
+								$role = Role::id( $role )->status( 'A' )->first();
+
+						}else{
+
+								$role = Role::name( $role )->status( 'A' )->first();
+
+						}
+
+				}
+
+				if( is_object( $role ) )
+				{
+
+						// if( $role->id == 1 )
+						// {
+						//
+						// 		return true;
+						//
+						// }
+
+						foreach( $role->routes as $route )
+						{
+
+								if( $route->id == $this->id )
+								{
+
+										return true;
+
+								}
+
+						}
+
+				}
+
+				return false;
+
+		}
+
 		// Scopes
 		public function scopeName( $query, $name )
 		{
@@ -154,6 +201,56 @@ class WebRoute extends Model
 						$query->where( 'routes.id', $id );
 
 				}
+
+		}
+
+		public function scopeStatus( $query, $status )
+		{
+
+				if( trim( $status ) != '' )
+				{
+
+						$query->where( 'routes.status', $status );
+
+				}
+
+		}
+
+		public static function scopeSelectValues( $query, $where = array(), $isNull = array(), $isNotNull = array() )
+		{
+
+				if( !empty( $where ) )
+				{
+
+						$query->where( $where );
+
+				}
+
+				if( !empty( $isNull ) )
+				{
+
+						foreach( $isNull as $field )
+						{
+
+								$query->whereNull( $field );
+
+						}
+
+				}
+
+				if( !empty( $isNotNull ) )
+				{
+
+						foreach( $isNotNull as $field )
+						{
+
+								$query->whereNotNull( $field );
+
+						}
+
+				}
+
+				return $query;
 
 		}
 

@@ -1,5 +1,26 @@
 @php
 
+		if( array_get( $params, 'fieldkey' ) )
+		{
+
+				$fieldKey = array_get( $params, 'fieldkey' );
+
+		}else{
+
+				$fieldKey = 'id';
+
+		}
+
+		if( array_get( $params, 'fieldvalue' ) )
+		{
+
+				$fieldValue = array_get( $params, 'fieldvalue' );
+
+		}else{
+
+				$fieldValue = $fieldKey;
+
+		}
 
 		if( $values && !is_array( $values ) )
 		{
@@ -14,7 +35,7 @@
 						foreach( $values as $item )
 						{
 
-								$selected[] = $item[ 'id' ];
+								$selected[] = $item[ $fieldKey ];
 
 						}
 
@@ -39,35 +60,47 @@
 
 		@if( array_get( $params, 'placeholder' ) )
 
-				<option value="&nbsp;" ></option>
+				<option value="" ></option>
 
 		@endif
 
 
-		@if( !empty( $options ) )
+		@if( is_array( $options ) )
 
-				@foreach( $options as $key => $option )
+				@if( !empty( $options ) )
 
-						@if( is_array( $option ) )
+						@foreach( $options as $key => $option )
 
-								<optgroup label="{{$key}}">
+								@if( is_array( $option ) )
 
-										@foreach( $option as $gkey => $goption )
+										<optgroup label="{{$key}}">
 
-												<option value="{{ $gkey }}" @if( in_array( $gkey, $values ) ) selected="selected" @endif >{{ $goption }}</option>
+												@foreach( $option as $gkey => $goption )
 
-										@endforeach
+														<option value="{{ $gkey }}" @if( in_array( $gkey, $values ) ) selected="selected" @endif >{{ $goption }}</option>
 
-								</optgroup>
+												@endforeach
 
-						@else
+										</optgroup>
 
-								<option value="{{ $key }}" @if( in_array( $key, $values ) ) selected="selected" @endif >{{ $option }}</option>
+								@else
 
-						@endif
+										<option value="{{ $key }}" @if( in_array( $key, $values ) ) selected="selected" @endif >{{ $option }}</option>
+
+								@endif
+
+						@endforeach
+
+		    @endif
+
+		@else
+
+				@foreach( $options->keyBy( $fieldKey ) as $key => $option )
+
+						<option value="{{ $key }}" @if( in_array( $key, $values ) ) selected="selected" @endif >{{ $option[ $fieldValue ] }}</option>
 
 				@endforeach
 
-    @endif
+		@endif
 
 </select>

@@ -633,6 +633,8 @@
 				validateObject.each( function()
 				{
 
+						console.log( this );
+
 						if( ValidateFields.prototype.validateField( this ) && validateValid )
 
 								validateValid	= true;
