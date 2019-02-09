@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 
 use App\Http\Controllers\MovementController;
 
-use App\Models\Aux\Movement as AuxMovement;
+use App\Models\Misc\Movement as AuxMovement;
 
 class OldGuaraniMovementsSeeder extends Seeder
 {

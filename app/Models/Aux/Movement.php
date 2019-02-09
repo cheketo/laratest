@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Aux;
+namespace App\Models\Misc;
 
 use DB;
 

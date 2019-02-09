@@ -20,7 +20,7 @@ use App\Models\Guarani\Person as GuaraniPerson;
 
 use App\Models\Guarani\Movement as GuaraniMovement;
 
-use App\Models\Aux\Movement as AuxMovement;
+use App\Models\Misc\Movement as AuxMovement;
 
 class MovementController extends Controller
 {

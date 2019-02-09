@@ -40,7 +40,7 @@ return array(
     'App\\Http\\Middleware\\UserCanBeEdited' => $baseDir . '/app/Http/Middleware/UserCanBeEdited.php',
     'App\\Http\\Middleware\\UserExist' => $baseDir . '/app/Http/Middleware/UserExist.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
-    'App\\Models\\Aux\\Movement' => $baseDir . '/app/Models/Aux/Movement.php',
+    'App\\Models\\Aux\\Movement' => $baseDir . '/app/Models/Misc/Movement.php',
     'App\\Models\\Career' => $baseDir . '/app/Models/Career.php',
     'App\\Models\\CareerGroup' => $baseDir . '/app/Models/CareerGroup.php',
     'App\\Models\\File' => $baseDir . '/app/Models/File.php',

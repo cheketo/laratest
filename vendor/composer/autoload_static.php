@@ -381,7 +381,7 @@ class ComposerStaticInitfd09e2de26594b141435c724683ca83a
         'App\\Http\\Middleware\\UserCanBeEdited' => __DIR__ . '/../..' . '/app/Http/Middleware/UserCanBeEdited.php',
         'App\\Http\\Middleware\\UserExist' => __DIR__ . '/../..' . '/app/Http/Middleware/UserExist.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
-        'App\\Models\\Aux\\Movement' => __DIR__ . '/../..' . '/app/Models/Aux/Movement.php',
+        'App\\Models\\Aux\\Movement' => __DIR__ . '/../..' . '/app/Models/Misc/Movement.php',
         'App\\Models\\Career' => __DIR__ . '/../..' . '/app/Models/Career.php',
         'App\\Models\\CareerGroup' => __DIR__ . '/../..' . '/app/Models/CareerGroup.php',
         'App\\Models\\File' => __DIR__ . '/../..' . '/app/Models/File.php',
