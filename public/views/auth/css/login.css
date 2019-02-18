@@ -15,12 +15,13 @@ body{
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-image: linear-gradient(rgb(104, 145, 162), rgb(224, 224, 224));
+    /* background-image: linear-gradient(rgb(266, 133, 17), rgb(249, 206, 153)); */
+		background-image: url( '/images/backgrounds/login.jpg' );
 		background-size: cover;
 }
 
 .card-container.card {
-    max-width: 350px;
+    max-width: 750px;
     padding: 40px 40px;
 }
 
@@ -42,7 +43,7 @@ body{
     /* just in case there no content*/
     padding: 20px 25px 30px;
     margin: 0 auto 25px;
-    margin-top: 50px;
+    margin-top: 15%;
     /* shadows and rounded borders */
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
@@ -53,14 +54,14 @@ body{
 }
 
 .profile-img-card {
-    width: 150px;
-    height: 150px;
+    /* width: 150px; */
+    height: 100px;
     margin: 0 auto 10px;
     display: block;
-    -moz-border-radius: 50%;
+    /* -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
-    border-radius: 50%;
-		background: rgb(255, 255, 255);
+    border-radius: 50%; */
+		/* background: rgb(255, 255, 255); */
 }
 
 /*

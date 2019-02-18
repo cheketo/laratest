@@ -24,7 +24,7 @@
 
 	  <![endif]-->
 
-		<title>@yield( 'tab_title' ) | FILO UBA</title>
+		<title>@yield( 'tab_title' ) | Renovatio</title>
 
 		@include( 'layouts.public.styles' )
 

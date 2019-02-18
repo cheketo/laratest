@@ -16,11 +16,6 @@ class PaymentMethodsTableSeeder extends Seeder
     {
 
 				$paymentMethod 							= new PaymentMethod();
-				$paymentMethod->name 				= 'Sistema Guarani (deprecado)';
-				$paymentMethod->status 			= 'I';
-				$paymentMethod->save();
-
-				$paymentMethod 							= new PaymentMethod();
 				$paymentMethod->name 				= 'Efectivo';
 				$paymentMethod->status 			= 'A';
 				$paymentMethod->save();

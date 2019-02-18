@@ -29,21 +29,19 @@ class CreatePaymentsTable extends Migration
 
 						$table->foreign( 'movement_id' )->references( 'id' )->on( 'movements' );
 
-						$table->unsignedInteger( 'student_id' );
+						$table->unsignedInteger( 'company_id' );
 
-						$table->foreign( 'student_id' )->references( 'id' )->on( 'students' );
+						$table->foreign( 'company_id' )->references( 'id' )->on( 'companies' );
 
 						$table->decimal( 'amount', 20, 2 )->unsigned();
 
-						$table->decimal( 'student_balance', 20, 2 )->unsigned();
+						$table->decimal( 'company_balance', 20, 2 )->unsigned();
 
 						$table->decimal( 'total_balance', 20, 2 )->unsigned();
 
 						$table->char( 'status', 1 )->default( 'P' );
 
 						$table->text( 'concept' )->nullable();
-
-						$table->unsignedInteger( 'guarani_id' )->nullable();
 
 						$table->date( 'creation_date' );
 

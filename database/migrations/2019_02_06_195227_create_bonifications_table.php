@@ -22,9 +22,9 @@ class CreateBonificationsTable extends Migration
 
 						$table->increments( 'id' );
 
-						$table->unsignedInteger( 'student_id' );
+						$table->unsignedInteger( 'company_id' );
 
-						$table->foreign( 'student_id' )->references( 'id' )->on( 'students' );
+						$table->foreign( 'company_id' )->references( 'id' )->on( 'companies' );
 
 						$table->unsignedInteger( 'movement_id' )->nullable();
 
@@ -36,7 +36,7 @@ class CreateBonificationsTable extends Migration
 
 						$table->decimal( 'amount', 20, 2 );
 
-						$table->decimal( 'student_balance', 20, 2 );
+						$table->decimal( 'company_balance', 20, 2 );
 
 						$table->decimal( 'total_balance', 20, 2 );
 

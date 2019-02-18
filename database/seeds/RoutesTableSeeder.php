@@ -74,28 +74,126 @@ class RoutesTableSeeder extends Seeder
 				$route->permission 	= 'private';
 				$route->save();
 
-
-				/*
-				 *  Import Route
+        /*
+				 *  Customer Routes
 				 */
 
 				$route 							= new WebRoute();
- 				$route->route 			= '/importaciones';
- 				$route->name 				= 'import_list';
- 				$route->verb 				= 'GET';
- 				$route->controller 	= 'GuaraniImporterController';
- 				$route->method 			= 'index';
+				$route->route 			= '/clientes';
+				$route->name 				= 'customer_list';
+				$route->verb 				= 'GET';
+				$route->controller 	= 'CustomerController';
+				$route->method 			= 'index';
+				$route->permission 	= 'role';
+				$route->save();
+
+				$route 							= new WebRoute();
+				$route->route 			= '/clientes/crear';
+				$route->name 				= 'customer_create';
+				$route->verb 				= 'GET';
+				$route->controller 	= 'CustomerController';
+				$route->method 			= 'create';
+				$route->permission 	= 'role';
+				$route->save();
+
+				$route 							= new WebRoute();
+ 				$route->route 			= '/clientes/crear';
+ 				$route->name 				= 'customer_store';
+ 				$route->verb 				= 'POST';
+ 				$route->controller 	= 'CustomerController';
+ 				$route->method 			= 'store';
  				$route->permission 	= 'role';
  				$route->save();
 
 				$route 							= new WebRoute();
-				$route->route 			= '/importaciones/crear';
-				$route->name 				= 'import_store';
-				$route->verb 				= 'POST';
-				$route->controller 	= 'GuaraniImporterController';
-				$route->method 			= 'import';
+				$route->route 			= '/clientes/{id}';
+				$route->name 				= 'customer_show';
+				$route->verb 				= 'GET';
+				$route->controller 	= 'CustomerController';
+				$route->method 			= 'show';
 				$route->permission 	= 'role';
 				$route->save();
+
+				$route 							= new WebRoute();
+				$route->route 			= '/clientes/editar/{id}';
+				$route->name 				= 'customer_edit';
+				$route->verb 				= 'GET';
+				$route->controller 	= 'CustomerController';
+				$route->method 			= 'edit';
+				$route->permission 	= 'role';
+				$route->save();
+
+				$route 							= new WebRoute();
+ 				$route->route 			= '/clientes/editar/{id}';
+ 				$route->name 				= 'customer_update';
+ 				$route->verb 				= 'POST';
+ 				$route->controller 	= 'CustomerController';
+ 				$route->method 			= 'update';
+ 				$route->permission 	= 'role';
+ 				$route->save();
+
+				$route 							= new WebRoute();
+ 				$route->route 			= '/clientes/eliminar/{id}';
+ 				$route->name 				= 'customer_delete';
+ 				$route->verb 				= 'POST';
+ 				$route->controller 	= 'CustomerController';
+ 				$route->method 			= 'delete';
+ 				$route->permission 	= 'role';
+ 				$route->save();
+
+				$route 							= new WebRoute();
+ 				$route->route 			= '/clientes/activar/{id}';
+ 				$route->name 				= 'customer_activate';
+ 				$route->verb 				= 'POST';
+ 				$route->controller 	= 'CustomerController';
+ 				$route->method 			= 'activate';
+ 				$route->permission 	= 'role';
+ 				$route->save();
+
+				$route 							= new WebRoute();
+ 				$route->route 			= '/customer/upload/image';
+ 				$route->name 				= 'customer_upload_image';
+ 				$route->verb 				= 'POST';
+ 				$route->controller 	= 'FileController';
+ 				$route->method 			= 'uploadImage';
+ 				$route->permission 	= 'role';
+ 				$route->save();
+
+        /*
+				 *  Company Routes
+				 */
+
+				$route 							= new WebRoute();
+ 				$route->route 			= '/company/validate/name';
+ 				$route->name 				= 'company_validate_name';
+ 				$route->verb 				= 'POST';
+ 				$route->controller 	= 'CompanyController';
+ 				$route->method 			= 'validateName';
+ 				$route->permission 	= 'role';
+ 				$route->save();
+
+
+				// /*
+				//  *  Import Route
+				//  */
+        //
+				// $route 							= new WebRoute();
+ 				// $route->route 			= '/importaciones';
+ 				// $route->name 				= 'import_list';
+ 				// $route->verb 				= 'GET';
+ 				// $route->controller 	= 'GuaraniImporterController';
+ 				// $route->method 			= 'index';
+ 				// $route->permission 	= 'role';
+ 				// $route->save();
+        //
+				// $route 							= new WebRoute();
+				// $route->route 			= '/importaciones/crear';
+				// $route->name 				= 'import_store';
+				// $route->verb 				= 'POST';
+				// $route->controller 	= 'GuaraniImporterController';
+				// $route->method 			= 'import';
+				// $route->permission 	= 'role';
+				// $route->save();
 
 				// $route 							= new WebRoute();
 				// $route->route 			= '/sync/students';
@@ -116,166 +214,166 @@ class RoutesTableSeeder extends Seeder
 				// $route->save();
 
 
-				/*
-				 *  Student Routes
-				 */
-
-				$route 							= new WebRoute();
-				$route->route 			= '/alumnos';
-				$route->name 				= 'student_list';
-				$route->verb 				= 'GET';
-				$route->controller 	= 'StudentController';
-				$route->method 			= 'index';
-				$route->permission 	= 'role';
-				$route->save();
-
-				$route 							= new WebRoute();
-				$route->route 			= '/alumnos/cuentacorriente/{id}';
-				$route->name 				= 'student_account';
-				$route->verb 				= 'GET';
-				$route->controller 	= 'StudentController';
-				$route->method 			= 'account';
-				$route->permission 	= 'role';
-				$route->save();
-
-				$route 							= new WebRoute();
-				$route->route 			= '/alumnos/inscripcion/{id}';
-				$route->name 				= 'student_enrole';
-				$route->verb 				= 'GET';
-				$route->controller 	= 'StudentController';
-				$route->method 			= 'enrole';
-				$route->permission 	= 'role';
-				$route->save();
-
-				$route 							= new WebRoute();
-				$route->route 			= '/alumnos/inscripcion/{id}';
-				$route->name 				= 'inscription_create';
-				$route->verb 				= 'POST';
-				$route->controller 	= 'InscriptionController';
-				$route->method 			= 'create';
-				$route->permission 	= 'role';
-				$route->save();
-
-				$route 							= new WebRoute();
-				$route->route 			= '/alumnos/categoria/{id}';
-				$route->name 				= 'student_category';
-				$route->verb 				= 'GET';
-				$route->controller 	= 'StudentController';
-				$route->method 			= 'category';
-				$route->permission 	= 'role';
-				$route->save();
-
-				$route 							= new WebRoute();
-				$route->route 			= '/alumnos/categoria/{id}';
-				$route->name 				= 'student_assign_category';
-				$route->verb 				= 'POST';
-				$route->controller 	= 'StudentController';
-				$route->method 			= 'assignCateogry';
-				$route->permission 	= 'role';
-				$route->save();
-
-				$route 							= new WebRoute();
-				$route->route 			= '/student/get/prices';
-				$route->name 				= 'student_get_prices';
-				$route->verb 				= 'POST';
-				$route->controller 	= 'StudentController';
-				$route->method 			= 'getPrices';
-				$route->permission 	= 'role';
-				$route->save();
-
-				/*
-				 *  Student Category Routes
-				 */
-
-				$route 							= new WebRoute();
-				$route->route 			= '/alumnos/categorias';
-				$route->name 				= 'student_category_list';
-				$route->verb 				= 'GET';
-				$route->controller 	= 'StudentCategoryController';
-				$route->method 			= 'index';
-				$route->permission 	= 'role';
-				$route->save();
-
-				$route 							= new WebRoute();
-				$route->route 			= '/alumnos/categorias/crear';
-				$route->name 				= 'student_category_create';
-				$route->verb 				= 'GET';
-				$route->controller 	= 'StudentCategoryController';
-				$route->method 			= 'create';
-				$route->permission 	= 'role';
-				$route->save();
-
-				$route 							= new WebRoute();
- 				$route->route 			= '/alumnos/categorias/crear';
- 				$route->name 				= 'student_category_store';
- 				$route->verb 				= 'POST';
- 				$route->controller 	= 'StudentCategoryController';
- 				$route->method 			= 'store';
- 				$route->permission 	= 'role';
- 				$route->save();
-
-				$route 							= new WebRoute();
- 				$route->route 			= '/alumnos/categorias/editar/{id}';
- 				$route->name 				= 'student_category_update';
- 				$route->verb 				= 'POST';
- 				$route->controller 	= 'StudentCategoryController';
- 				$route->method 			= 'update';
- 				$route->permission 	= 'role';
- 				$route->save();
-
-				$route 							= new WebRoute();
-				$route->route 			= '/alumnos/categorias/editar/{id}';
-				$route->name 				= 'student_category_edit';
-				$route->verb 				= 'GET';
-				$route->controller 	= 'StudentCategoryController';
-				$route->method 			= 'edit';
-				$route->permission 	= 'role';
-				$route->save();
-
-				$route 							= new WebRoute();
- 				$route->route 			= '/alumnos/categorias/eliminar/{id}';
- 				$route->name 				= 'student_category_delete';
- 				$route->verb 				= 'POST';
- 				$route->controller 	= 'StudentCategoryController';
- 				$route->method 			= 'delete';
- 				$route->permission 	= 'role';
- 				$route->save();
-
-				$route 							= new WebRoute();
- 				$route->route 			= '/alumnos/categorias/activar/{id}';
- 				$route->name 				= 'student_category_activate';
- 				$route->verb 				= 'POST';
- 				$route->controller 	= 'StudentCategoryController';
- 				$route->method 			= 'activate';
- 				$route->permission 	= 'role';
- 				$route->save();
-
-				$route 							= new WebRoute();
- 				$route->route 			= '/student/category/validate/name';
- 				$route->name 				= 'student_category_validate_name';
- 				$route->verb 				= 'POST';
- 				$route->controller 	= 'StudentCategoryController';
- 				$route->method 			= 'validateName';
- 				$route->permission 	= 'role';
- 				$route->save();
-
-				$route 							= new WebRoute();
- 				$route->route 			= '/student/category/validate/foreign';
- 				$route->name 				= 'student_category_validate_foreign';
- 				$route->verb 				= 'POST';
- 				$route->controller 	= 'StudentCategoryController';
- 				$route->method 			= 'validateForeign';
- 				$route->permission 	= 'role';
- 				$route->save();
-
-				$route 							= new WebRoute();
-				$route->route 			= '/alumnos/categorias/{id}';
-				$route->name 				= 'student_category_show';
-				$route->verb 				= 'GET';
-				$route->controller 	= 'StudentCategoryController';
-				$route->method 			= 'show';
-				$route->permission 	= 'role';
-				$route->save();
+				// /*
+				//  *  Student Routes
+				//  */
+        //
+				// $route 							= new WebRoute();
+				// $route->route 			= '/alumnos';
+				// $route->name 				= 'student_list';
+				// $route->verb 				= 'GET';
+				// $route->controller 	= 'StudentController';
+				// $route->method 			= 'index';
+				// $route->permission 	= 'role';
+				// $route->save();
+        //
+				// $route 							= new WebRoute();
+				// $route->route 			= '/alumnos/cuentacorriente/{id}';
+				// $route->name 				= 'student_account';
+				// $route->verb 				= 'GET';
+				// $route->controller 	= 'StudentController';
+				// $route->method 			= 'account';
+				// $route->permission 	= 'role';
+				// $route->save();
+        //
+				// $route 							= new WebRoute();
+				// $route->route 			= '/alumnos/inscripcion/{id}';
+				// $route->name 				= 'student_enrole';
+				// $route->verb 				= 'GET';
+				// $route->controller 	= 'StudentController';
+				// $route->method 			= 'enrole';
+				// $route->permission 	= 'role';
+				// $route->save();
+        //
+				// $route 							= new WebRoute();
+				// $route->route 			= '/alumnos/inscripcion/{id}';
+				// $route->name 				= 'inscription_create';
+				// $route->verb 				= 'POST';
+				// $route->controller 	= 'InscriptionController';
+				// $route->method 			= 'create';
+				// $route->permission 	= 'role';
+				// $route->save();
+        //
+				// $route 							= new WebRoute();
+				// $route->route 			= '/alumnos/categoria/{id}';
+				// $route->name 				= 'student_category';
+				// $route->verb 				= 'GET';
+				// $route->controller 	= 'StudentController';
+				// $route->method 			= 'category';
+				// $route->permission 	= 'role';
+				// $route->save();
+        //
+				// $route 							= new WebRoute();
+				// $route->route 			= '/alumnos/categoria/{id}';
+				// $route->name 				= 'student_assign_category';
+				// $route->verb 				= 'POST';
+				// $route->controller 	= 'StudentController';
+				// $route->method 			= 'assignCateogry';
+				// $route->permission 	= 'role';
+				// $route->save();
+        //
+				// $route 							= new WebRoute();
+				// $route->route 			= '/student/get/prices';
+				// $route->name 				= 'student_get_prices';
+				// $route->verb 				= 'POST';
+				// $route->controller 	= 'StudentController';
+				// $route->method 			= 'getPrices';
+				// $route->permission 	= 'role';
+				// $route->save();
+        //
+				// /*
+				//  *  Student Category Routes
+				//  */
+        //
+				// $route 							= new WebRoute();
+				// $route->route 			= '/alumnos/categorias';
+				// $route->name 				= 'student_category_list';
+				// $route->verb 				= 'GET';
+				// $route->controller 	= 'StudentCategoryController';
+				// $route->method 			= 'index';
+				// $route->permission 	= 'role';
+				// $route->save();
+        //
+				// $route 							= new WebRoute();
+				// $route->route 			= '/alumnos/categorias/crear';
+				// $route->name 				= 'student_category_create';
+				// $route->verb 				= 'GET';
+				// $route->controller 	= 'StudentCategoryController';
+				// $route->method 			= 'create';
+				// $route->permission 	= 'role';
+				// $route->save();
+        //
+				// $route 							= new WebRoute();
+ 				// $route->route 			= '/alumnos/categorias/crear';
+ 				// $route->name 				= 'student_category_store';
+ 				// $route->verb 				= 'POST';
+ 				// $route->controller 	= 'StudentCategoryController';
+ 				// $route->method 			= 'store';
+ 				// $route->permission 	= 'role';
+ 				// $route->save();
+        //
+				// $route 							= new WebRoute();
+ 				// $route->route 			= '/alumnos/categorias/editar/{id}';
+ 				// $route->name 				= 'student_category_update';
+ 				// $route->verb 				= 'POST';
+ 				// $route->controller 	= 'StudentCategoryController';
+ 				// $route->method 			= 'update';
+ 				// $route->permission 	= 'role';
+ 				// $route->save();
+        //
+				// $route 							= new WebRoute();
+				// $route->route 			= '/alumnos/categorias/editar/{id}';
+				// $route->name 				= 'student_category_edit';
+				// $route->verb 				= 'GET';
+				// $route->controller 	= 'StudentCategoryController';
+				// $route->method 			= 'edit';
+				// $route->permission 	= 'role';
+				// $route->save();
+        //
+				// $route 							= new WebRoute();
+ 				// $route->route 			= '/alumnos/categorias/eliminar/{id}';
+ 				// $route->name 				= 'student_category_delete';
+ 				// $route->verb 				= 'POST';
+ 				// $route->controller 	= 'StudentCategoryController';
+ 				// $route->method 			= 'delete';
+ 				// $route->permission 	= 'role';
+ 				// $route->save();
+        //
+				// $route 							= new WebRoute();
+ 				// $route->route 			= '/alumnos/categorias/activar/{id}';
+ 				// $route->name 				= 'student_category_activate';
+ 				// $route->verb 				= 'POST';
+ 				// $route->controller 	= 'StudentCategoryController';
+ 				// $route->method 			= 'activate';
+ 				// $route->permission 	= 'role';
+ 				// $route->save();
+        //
+				// $route 							= new WebRoute();
+ 				// $route->route 			= '/student/category/validate/name';
+ 				// $route->name 				= 'student_category_validate_name';
+ 				// $route->verb 				= 'POST';
+ 				// $route->controller 	= 'StudentCategoryController';
+ 				// $route->method 			= 'validateName';
+ 				// $route->permission 	= 'role';
+ 				// $route->save();
+        //
+				// $route 							= new WebRoute();
+ 				// $route->route 			= '/student/category/validate/foreign';
+ 				// $route->name 				= 'student_category_validate_foreign';
+ 				// $route->verb 				= 'POST';
+ 				// $route->controller 	= 'StudentCategoryController';
+ 				// $route->method 			= 'validateForeign';
+ 				// $route->permission 	= 'role';
+ 				// $route->save();
+        //
+				// $route 							= new WebRoute();
+				// $route->route 			= '/alumnos/categorias/{id}';
+				// $route->name 				= 'student_category_show';
+				// $route->verb 				= 'GET';
+				// $route->controller 	= 'StudentCategoryController';
+				// $route->method 			= 'show';
+				// $route->permission 	= 'role';
+				// $route->save();
 
 				/*
 				 *  Person Routes
@@ -290,152 +388,152 @@ class RoutesTableSeeder extends Seeder
 				// $route->permission 	= 'role';
 				// $route->save();
 
-				/*
-				 *  Career Routes
-				 */
-
-				$route 							= new WebRoute();
-				$route->route 			= '/carreras';
-				$route->name 				= 'career_list';
-				$route->verb 				= 'GET';
-				$route->controller 	= 'CareerController';
-				$route->method 			= 'index';
-				$route->permission 	= 'role';
-				$route->save();
-
-				/*
-				 *  Prices Routes
-				 */
-
-				$route 							= new WebRoute();
-				$route->route 			= '/precios';
-				$route->name 				= 'price_list';
-				$route->verb 				= 'GET';
-				$route->controller 	= 'PriceController';
-				$route->method 			= 'index';
-				$route->permission 	= 'role';
-				$route->save();
-
-				$route 							= new WebRoute();
- 				$route->route 			= '/precios/editar/{group}/{cateogry}';
- 				$route->name 				= 'price_edit';
- 				$route->verb 				= 'GET';
- 				$route->controller 	= 'PriceController';
- 				$route->method 			= 'edit';
- 				$route->permission 	= 'role';
- 				$route->save();
-
-				$route 							= new WebRoute();
- 				$route->route 			= '/precios/editar/{group}/{cateogry}';
- 				$route->name 				= 'price_update';
- 				$route->verb 				= 'POST';
- 				$route->controller 	= 'PriceController';
- 				$route->method 			= 'update';
- 				$route->permission 	= 'role';
- 				$route->save();
-
-				$route 							= new WebRoute();
- 				$route->route 			= '/precios/historial';
- 				$route->name 				= 'price_history_list';
- 				$route->verb 				= 'GET';
- 				$route->controller 	= 'PriceHistoryController';
- 				$route->method 			= 'index';
- 				$route->permission 	= 'role';
- 				$route->save();
-
-				/*
-				 *  Career Group Routes
-				 */
-
-				$route 							= new WebRoute();
- 				$route->route 			= '/carreras/grupos';
- 				$route->name 				= 'career_group_list';
- 				$route->verb 				= 'GET';
- 				$route->controller 	= 'CareerGroupController';
- 				$route->method 			= 'index';
- 				$route->permission 	= 'role';
- 				$route->save();
-
- 				$route 							= new WebRoute();
- 				$route->route 			= '/carreras/grupos/crear';
- 				$route->name 				= 'career_group_create';
- 				$route->verb 				= 'GET';
- 				$route->controller 	= 'CareerGroupController';
- 				$route->method 			= 'create';
- 				$route->permission 	= 'role';
- 				$route->save();
-
- 				$route 							= new WebRoute();
-				$route->route 			= '/carreras/grupos/crear';
-				$route->name 				= 'career_group_store';
-				$route->verb 				= 'POST';
-				$route->controller 	= 'CareerGroupController';
-				$route->method 			= 'store';
-				$route->permission 	= 'role';
-				$route->save();
-
- 				$route 							= new WebRoute();
- 				$route->route 			= '/carreras/grupos/detalle/{id}';
- 				$route->name 				= 'career_group_show';
- 				$route->verb 				= 'GET';
- 				$route->controller 	= 'CareerGroupController';
- 				$route->method 			= 'show';
- 				$route->permission 	= 'role';
- 				$route->save();
-
- 				$route 							= new WebRoute();
- 				$route->route 			= '/carreras/grupos/editar/{id}';
- 				$route->name 				= 'career_group_edit';
- 				$route->verb 				= 'GET';
- 				$route->controller 	= 'CareerGroupController';
- 				$route->method 			= 'edit';
- 				$route->permission 	= 'role';
- 				$route->save();
-
- 				$route 							= new WebRoute();
-				$route->route 			= '/carreras/grupos/editar/{id}';
-				$route->name 				= 'career_group_update';
-				$route->verb 				= 'POST';
-				$route->controller 	= 'CareerGroupController';
-				$route->method 			= 'update';
-				$route->permission 	= 'role';
-				$route->save();
-
- 				$route 							= new WebRoute();
-				$route->route 			= '/carreras/grupos/eliminar/{id}';
-				$route->name 				= 'career_group_delete';
-				$route->verb 				= 'POST';
-				$route->controller 	= 'CareerGroupController';
-				$route->method 			= 'delete';
-				$route->permission 	= 'role';
-				$route->save();
-
- 				$route 							= new WebRoute();
-				$route->route 			= '/carreras/grupos/activar/{id}';
-				$route->name 				= 'career_group_activate';
-				$route->verb 				= 'POST';
-				$route->controller 	= 'CareerGroupController';
-				$route->method 			= 'activate';
-				$route->permission 	= 'role';
-				$route->save();
-
- 				$route 							= new WebRoute();
-				$route->route 			= '/career/group/validate/name';
-				$route->name 				= 'career_group_validate_name';
-				$route->verb 				= 'POST';
-				$route->controller 	= 'CareerGroupController';
-				$route->method 			= 'validateName';
-				$route->permission 	= 'role';
-				$route->save();
-
-				$route 							= new WebRoute();
-				$route->route 			= '/career/group/validate/prefixes';
-				$route->name 				= 'career_group_validate_prefixes';
-				$route->verb 				= 'POST';
-				$route->controller 	= 'CareerGroupController';
-				$route->method 			= 'validatePrefixes';
-				$route->permission 	= 'role';
-				$route->save();
+				// /*
+				//  *  Career Routes
+				//  */
+        //
+				// $route 							= new WebRoute();
+				// $route->route 			= '/carreras';
+				// $route->name 				= 'career_list';
+				// $route->verb 				= 'GET';
+				// $route->controller 	= 'CareerController';
+				// $route->method 			= 'index';
+				// $route->permission 	= 'role';
+				// $route->save();
+        //
+				// /*
+				//  *  Prices Routes
+				//  */
+        //
+				// $route 							= new WebRoute();
+				// $route->route 			= '/precios';
+				// $route->name 				= 'price_list';
+				// $route->verb 				= 'GET';
+				// $route->controller 	= 'PriceController';
+				// $route->method 			= 'index';
+				// $route->permission 	= 'role';
+				// $route->save();
+        //
+				// $route 							= new WebRoute();
+ 				// $route->route 			= '/precios/editar/{group}/{cateogry}';
+ 				// $route->name 				= 'price_edit';
+ 				// $route->verb 				= 'GET';
+ 				// $route->controller 	= 'PriceController';
+ 				// $route->method 			= 'edit';
+ 				// $route->permission 	= 'role';
+ 				// $route->save();
+        //
+				// $route 							= new WebRoute();
+ 				// $route->route 			= '/precios/editar/{group}/{cateogry}';
+ 				// $route->name 				= 'price_update';
+ 				// $route->verb 				= 'POST';
+ 				// $route->controller 	= 'PriceController';
+ 				// $route->method 			= 'update';
+ 				// $route->permission 	= 'role';
+ 				// $route->save();
+        //
+				// $route 							= new WebRoute();
+ 				// $route->route 			= '/precios/historial';
+ 				// $route->name 				= 'price_history_list';
+ 				// $route->verb 				= 'GET';
+ 				// $route->controller 	= 'PriceHistoryController';
+ 				// $route->method 			= 'index';
+ 				// $route->permission 	= 'role';
+ 				// $route->save();
+        //
+				// /*
+				//  *  Career Group Routes
+				//  */
+        //
+				// $route 							= new WebRoute();
+ 				// $route->route 			= '/carreras/grupos';
+ 				// $route->name 				= 'career_group_list';
+ 				// $route->verb 				= 'GET';
+ 				// $route->controller 	= 'CareerGroupController';
+ 				// $route->method 			= 'index';
+ 				// $route->permission 	= 'role';
+ 				// $route->save();
+        //
+ 				// $route 							= new WebRoute();
+ 				// $route->route 			= '/carreras/grupos/crear';
+ 				// $route->name 				= 'career_group_create';
+ 				// $route->verb 				= 'GET';
+ 				// $route->controller 	= 'CareerGroupController';
+ 				// $route->method 			= 'create';
+ 				// $route->permission 	= 'role';
+ 				// $route->save();
+        //
+ 				// $route 							= new WebRoute();
+				// $route->route 			= '/carreras/grupos/crear';
+				// $route->name 				= 'career_group_store';
+				// $route->verb 				= 'POST';
+				// $route->controller 	= 'CareerGroupController';
+				// $route->method 			= 'store';
+				// $route->permission 	= 'role';
+				// $route->save();
+        //
+ 				// $route 							= new WebRoute();
+ 				// $route->route 			= '/carreras/grupos/detalle/{id}';
+ 				// $route->name 				= 'career_group_show';
+ 				// $route->verb 				= 'GET';
+ 				// $route->controller 	= 'CareerGroupController';
+ 				// $route->method 			= 'show';
+ 				// $route->permission 	= 'role';
+ 				// $route->save();
+        //
+ 				// $route 							= new WebRoute();
+ 				// $route->route 			= '/carreras/grupos/editar/{id}';
+ 				// $route->name 				= 'career_group_edit';
+ 				// $route->verb 				= 'GET';
+ 				// $route->controller 	= 'CareerGroupController';
+ 				// $route->method 			= 'edit';
+ 				// $route->permission 	= 'role';
+ 				// $route->save();
+        //
+ 				// $route 							= new WebRoute();
+				// $route->route 			= '/carreras/grupos/editar/{id}';
+				// $route->name 				= 'career_group_update';
+				// $route->verb 				= 'POST';
+				// $route->controller 	= 'CareerGroupController';
+				// $route->method 			= 'update';
+				// $route->permission 	= 'role';
+				// $route->save();
+        //
+ 				// $route 							= new WebRoute();
+				// $route->route 			= '/carreras/grupos/eliminar/{id}';
+				// $route->name 				= 'career_group_delete';
+				// $route->verb 				= 'POST';
+				// $route->controller 	= 'CareerGroupController';
+				// $route->method 			= 'delete';
+				// $route->permission 	= 'role';
+				// $route->save();
+        //
+ 				// $route 							= new WebRoute();
+				// $route->route 			= '/carreras/grupos/activar/{id}';
+				// $route->name 				= 'career_group_activate';
+				// $route->verb 				= 'POST';
+				// $route->controller 	= 'CareerGroupController';
+				// $route->method 			= 'activate';
+				// $route->permission 	= 'role';
+				// $route->save();
+        //
+ 				// $route 							= new WebRoute();
+				// $route->route 			= '/career/group/validate/name';
+				// $route->name 				= 'career_group_validate_name';
+				// $route->verb 				= 'POST';
+				// $route->controller 	= 'CareerGroupController';
+				// $route->method 			= 'validateName';
+				// $route->permission 	= 'role';
+				// $route->save();
+        //
+				// $route 							= new WebRoute();
+				// $route->route 			= '/career/group/validate/prefixes';
+				// $route->name 				= 'career_group_validate_prefixes';
+				// $route->verb 				= 'POST';
+				// $route->controller 	= 'CareerGroupController';
+				// $route->method 			= 'validatePrefixes';
+				// $route->permission 	= 'role';
+				// $route->save();
 
 				/*
 				 *  User Routes
@@ -529,7 +627,7 @@ class RoutesTableSeeder extends Seeder
  				$route->name 				= 'user_upload_image';
  				$route->verb 				= 'POST';
  				$route->controller 	= 'FileController';
- 				$route->method 			= 'upoadImage';
+ 				$route->method 			= 'uploadImage';
  				$route->permission 	= 'role';
  				$route->save();
 

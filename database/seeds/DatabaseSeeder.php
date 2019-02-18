@@ -24,15 +24,11 @@ class DatabaseSeeder extends Seeder
 
 				$this->call( MenusTableSeeder::class );
 
-				$this->call( StudentCategoriesTableSeeder::class );
+        $this->call( CompanyProfilesTableSeeder::class );
 
-				$this->call( CareerGroupsTableSeeder::class );
-
-				$this->call( MovementTypesTableSeeder::class );
+        $this->call( CompanyTypesTableSeeder::class );
 
 				$this->call( PaymentMethodsTableSeeder::class );
-
-				$this->call( OldGuaraniMovementsSeeder::class );
 
     }
 

@@ -216,7 +216,7 @@
 
 												@if( $results->count() < 1 )
 
-														<div class="callout callout-info">
+														<div class="callout callout-info bg-aqua-gradient">
 
 																<h4>
 

@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
 
-use App\Models\Person;
-
 use App\Models\Role;
 
 use App\Models\File;

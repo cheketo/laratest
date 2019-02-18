@@ -609,7 +609,7 @@ function chosenSelect()
 						if( tabindex )
 						{
 
-								$( '#' + id + '_chosen' ).children( '.chosen-choices' ).children( '.search-field' ).children( '.chosen-search-input' ).attr( 'tabindex', tabindex.replace('"','') );
+								$( '#' + id + '_chosen' ).children( '.chosen-choices' ).children( '.search-field' ).children( '.chosen-search-input' ).attr( 'tabindex', tabindex.replace( '"', '' ) );
 
 						}
 
@@ -849,7 +849,7 @@ function inputMask()
 	    			if( !$( this ).inputmask( "hasMaskedValue" ) )
 	    			{
 
-	      				$(this).inputmask();  //static mask
+	      				jQuery(this).inputmask();  //static mask
 
 	    			}
 

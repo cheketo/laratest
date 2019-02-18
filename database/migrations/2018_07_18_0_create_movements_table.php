@@ -22,53 +22,32 @@ class CreateMovementsTable extends Migration
 
             $table->increments( 'id' );
 
-						$table->morphs( 'reference' ); // Polymorphic relation width Payments and Inscriptions ( creates reference_type and reference_id )
+						$table->morphs( 'reference' ); // Polymorphic relation ( creates reference_type and reference_id )
 
-						$table->unsignedInteger( 'student_id' )->nullable();
+						$table->unsignedInteger( 'company_id' )->nullable();
 
-						// $table->unsignedInteger( 'parent_id' )->nullable();
-
-						// $table->unsignedInteger( 'guarani_id' )->nullable();
-
-						// $table->foreign( 'guarani_id' )->references( 'id' )->on( 'guarani_movements' );
-
-						// $table->unsignedInteger( 'type_id' );
-
-						// $table->foreign( 'type_id' )->references( 'id' )->on( 'movement_types' );
+            $table->foreign( 'company_id' )->references( 'id' )->on( 'companies' );
 
 						$table->decimal( 'amount', 20, 2 );
 
-						$table->decimal( 'student_balance', 20, 2 );
-
-						// $table->decimal( 'student_credit_balance', 10, 2 )->unsigned();
-						//
-						// $table->decimal( 'student_debit_balance', 10, 2 )->unsigned();
+						$table->decimal( 'company_balance', 20, 2 );
 
 						$table->decimal( 'total_balance', 20, 2 );
-
-						// $table->decimal( 'total_credit_balance', 10, 2 )->unsigned();
-						//
-						// $table->decimal( 'total_debit_balance', 10, 2 )->unsigned();
-
-						// $table->text( 'concept' )->nullable();
-
-						// $table->date( 'due_date' )->nullable();
-
-						// $table->date( 'creation_date' )->nullable();
 
 						$table->unsignedInteger( 'created_by' )->nullable();
 
 						$table->foreign( 'created_by' )->references( 'id' )->on( 'users' );
 
-						// $table->unsignedInteger( 'updated_by' )->nullable();
-						//
-						// $table->foreign( 'updated_by' )->references( 'id' )->on( 'users' );
-
             $table->timestamps();
 
-						// $table->index( 'guarani_id' );
-
         });
+
+        Schema::table( 'companies', function( Blueprint $table )
+				{
+
+						$table->foreign( 'last_movement_id' )->references( 'id' )->on( 'movements' );
+
+				});
 
     }
 

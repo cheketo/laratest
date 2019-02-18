@@ -31,7 +31,7 @@ class DashboardController extends Controller
 				// dd( \App\Http\Controllers\MovementController::importFromGuarani() );
 
 
-				CareerController::insertNewCareers();
+				// CareerController::insertNewCareers();
 
 				return view( 'dashboard' );
 

@@ -38,6 +38,9 @@ html {
 .txR {
   text-align: right; }
 
+.form-field-title {
+  font-size: 20px!important; }
+
 .subtitle {
   display: block;
   padding: 15px 0; }
@@ -351,7 +354,6 @@ html {
   }
 }
 
-
 .loader {
   background: rgba(0, 0, 0, 0.83);
   width: 100%;
@@ -377,12 +379,10 @@ html {
   flex-direction: column; }
 
 .loader img.loaderLogo {
-  width: 250px;
+  height: 100px;
   max-width: 100%;
-	background-color: #fff;
-	-webkit-border-radius: 50%;
-	-moz-border-radius: 50%;
-	border-radius: 50%;}
+	background-color: #eee;
+	}
 
 	.flex-container {
 	  display: -webkit-box;
@@ -453,46 +453,3 @@ html {
 	.cursor-pointer {
 		cursor:pointer;
 	}
-
-/* WINDOW POP UP */
-/* .window {
-  padding:2%;
-  background:rgba(0,0,0,0.3);
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  z-index:1030;
-  overflow:hidden;
-  -webkit-overflow-scrolling:touch;
-}
-
-.window .window-border
-{
-  height: 8%;
-  padding:5px;
-  box-sizing: border-box;
-  background-color: #344956;
-  color:white;
-  padding-left:10px;
-  padding-right:10px;
-}
-
-.window .window-body
-{
-  height: 84%;
-  max-height: 84%;
-  padding:5px;
-  box-sizing: border-box;
-  background-color: #EEE;
-  color:#595959;
-  position: relative;
-  overflow-y:scroll;
-}
-
-.window .window-border .window-close
-{
-  color:red;
-  cursor:pointer;
-} */

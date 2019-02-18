@@ -47,15 +47,6 @@ class CreateUsersTable extends Migration
 
         });
 
-				// Schema::table('users', function (Blueprint $table)
-				// {
-				//
-				// 		$table->foreign('image_id')->references('id')->on('files');
-				//
-				// });
-
-
-
     }
 
     /**

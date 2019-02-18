@@ -10,7 +10,7 @@ class FileController extends Controller
 
 		const DEFAULT_NEW_FILE_ROUTE = 'uploads/new/images';
 
-		public function upoadImage( Request $request )
+		public function uploadImage( Request $request )
 		{
 
 				if( $request->ajax() )

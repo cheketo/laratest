@@ -1,7 +1,7 @@
 <!-- Loader  -->
 <div class="loader animated fadeIn Hidden">
 
-	  <img class="loaderLogo" src="/images/skin/logouba.png" alt="Logo UBA" />
+	  <img class="loaderLogo" src="/images/skin/logo.png" alt="Logo" />
 
 		<br>
 

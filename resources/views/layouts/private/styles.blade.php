@@ -1,9 +1,9 @@
 <!-- Font Awesome -->
 {{ HTML::style( 'vendor/font-awesome/css/font-awesome.min.css' ) }}
 
-{{ HTML::style( 'https://use.fontawesome.com/releases/v5.2.0/css/all.css' ) }}
+{{ HTML::style( 'https://use.fontawesome.com/releases/v5.7.2/css/all.css' ) }}
 
-{{ HTML::style( 'https://use.fontawesome.com/releases/v5.2.0/css/v4-shims.css' ) }}
+{{ HTML::style( 'https://use.fontawesome.com/releases/v5.7.2/css/v4-shims.css' ) }}
 
 <!-- Ionicons -->
 {{ HTML::style( 'vendor/ionicons/css/ionicons.min.css' ) }}

@@ -26,13 +26,11 @@ class CreateMovementRelationsTable extends Migration
 
 						$table->nullableMorphs( 'debit' ); // Polymorphic relation width Fees, Enrollments and Debts ( creates debit_type and debit_id )
 
-						$table->unsignedInteger( 'student_id' )->nullable();
+						$table->unsignedInteger( 'company_id' )->nullable();
 
-						$table->foreign( 'student_id' )->references( 'id' )->on( 'students' );
+						$table->foreign( 'company_id' )->references( 'id' )->on( 'companies' );
 
 						$table->decimal( 'amount', 20, 2 )->unsigned();
-
-						$table->unsignedInteger( 'guarani_id' )->nullable();
 
 						$table->unsignedInteger( 'created_by' )->nullable();
 
