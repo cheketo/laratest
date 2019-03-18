@@ -8,9 +8,9 @@
 
 @section( 'scripts' )
 
-	{{ HTML::script( '/views/users/js/main.js' ) }}
+		{{ HTML::script( '/views/users/js/main.js' ) }}
 
-	{{ HTML::script( '/views/users/js/create.js' ) }}
+		{{ HTML::script( '/views/users/js/create.js' ) }}
 
 @endsection
 
@@ -125,7 +125,7 @@
 
 														<div class="imgSelectorInner" tabindex="8">
 
-																<img src="/views/users/images/default/default.jpg" class="img-responsive MainImg animated">
+																<img src="{{ $defaultImage->route }}" class="img-responsive MainImg animated">
 
 																<input type="file" id="image" name="image" class="Hidden" value="" accept="image/*">
 

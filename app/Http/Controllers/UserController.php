@@ -84,7 +84,9 @@ class UserController extends Controller
 
 				$images = self::getUserDefaultImages();
 
-				return view( 'users.create', [ 'images' => $images ] );
+        $defaultImage = File::route( '/views/users/images/default/default.jpg' )->first();
+
+				return view( 'users.create', compact( 'images', 'defaultImage' ) );
 
     }
 
@@ -115,7 +117,7 @@ class UserController extends Controller
 						if( strpos( $request->newimage, '/') === false )
 						{
 
-								$image 				= File::find( $request->newimage );
+								$image 				= File::route( $request->newimage )->first();
 
 						}else{
 

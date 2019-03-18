@@ -18,11 +18,18 @@ class File extends Model
 
 		}
 
-		// public function fileable()
-    // {
-		//
-    //     return $this->morphTo();
-		//
-    // }
+		// Scopes
+
+		public function scopeRoute( $query, $route )
+		{
+
+				if( trim( $route ) != '' )
+				{
+
+						return $query->where( 'route', 'LIKE', '%' . $route . '%' );
+
+				}
+
+		}
 
 }
