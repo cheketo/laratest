@@ -10,6 +10,8 @@
 
 		{{ HTML::style( '/vendor/iCheck/all.css' ) }}
 
+		{{ HTML::style( '/views/customers/css/branch.css' ) }}
+
 @endsection
 
 @section( 'scripts' )
@@ -17,6 +19,10 @@
 	{{ HTML::script( '/views/customers/js/main.js' ) }}
 
 	{{ HTML::script( '/views/customers/js/create.js' ) }}
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuMB_Fpcn6USQEoumEHZB_s31XSQeKQc0&libraries=places&language=es" async defer></script>
+
+	{{ HTML::script( '/views/customers/js/branch.js' ) }}
 
 	{{ HTML::script( '/vendor/inputmask/jquery.inputmask.bundle.min.js' ) }}
 
@@ -236,119 +242,49 @@
 
 			                <div class="col-md-2 no-float txC" style="border-bottom:1px solid #eee;padding-right:0px;">
 
-			                    <div class="" style="border-bottom:1px solid #eee;padding:10px 0px;cursor:pointer;">
+													<div id="BranchLabelContainer">
 
-			                        <strong>Sucursal Central</strong>
+															<!-- <div class="branchLabel" id="branch_label_1">
 
-			                    </div>
+																	<strong>Sucursal Central</strong>
 
-			                    <div class="" style="border-bottom:1px solid #eee;padding:10px 0px;cursor:pointer;">
+															</div>
 
-			                        Sucursal 2
+															<div class="branchLabel">
 
-			                    </div>
+																	Sucursal 2
 
-			                    <div class="" style="border-bottom:1px solid #eee;padding:10px 0px;cursor:pointer;">
+															</div>
 
-			                        Sucursal 3
+															<div class="branchLabel">
 
-			                    </div>
+																	Sucursal 3
+
+															</div> -->
+
+													</div>
 
 			                    <!-- <button type="button" id="agregar_sucursal" class="btn bg-purple btn-flat margin"><i class="fa fa-map"></i> Agregar Sucursal</button> -->
 
 			                    <div class="input-group margin">
 
-			                      <input type="text" class="form-control txC" placeholder="Nueva Sucursal">
+			                      	<input type="text" class="form-control txC" placeholder="Nueva Sucursal" id="new_branch_name">
 
-			                          <span class="input-group-btn">
+		                          <span class="input-group-btn">
 
-			                              <button type="button" class="btn bg-purple btn-flat"><i class="fa fa-plus"></i></button>
+		                              <button type="button" class="btn bg-purple btn-flat addBranch"><i class="fa fa-plus"></i></button>
 
-			                          </span>
+		                          </span>
 
 			                    </div>
 
 			                </div>
 
-			                <div class="col-md-10 no-float" style="border-left:1px solid #eee;padding-bottom:10px;">
+											<div class="col-md-10 no-float" style="border-left:1px solid #eee;padding-bottom:10px;">
 
-													<div class="row" style="border-bottom:1px solid #eee;">
+			                		@include( 'customers.components.branch' )
 
-															<div class="col-md-4 pad0"><span class="btn btn-flat btn-primary btn-block btn-lg txC cursor-pointer mar0"><i class="fas fa-mail-bulk"></i> Información</span></div>
-															<div class="col-md-4 pad0"><span class="btn btn-flat btn-info btn-block btn-lg txC cursor-pointer mar0"><i class="fas fa-map-marker-alt"></i> Geolocalización</span></div>
-															<div class="col-md-4 pad0"><span class="btn btn-flat btn-info btn-block btn-lg txC cursor-pointer mar0"><i class="far fa-clock"></i> Atención</span></div>
-
-													</div>
-
-													<div class="row">
-
-															<div class="col-md-6">
-
-																	<div class="input-group margin-top-10">
-
-																			<span class="input-group-addon span-signin no-right-border-radius">{{ Form::hint( 'Nombre de la sucursal', 'bottom', 'fas fa-bookmark' ) }}</span>
-
-																			<input type="text" name="branch_name" id="branch_name" class="form-control no-left-border-radius" placeholder="Nombre Sucursal" tabindex="1" validateEmpty="El nombre es obligatorio.">
-
-																	</div>
-
-																	<div class="input-group margin-top-10">
-
-																			<span class="input-group-addon span-signin no-right-border-radius">{{ Form::hint( 'País dónde se encuentra la sucursal', 'bottom', 'fas fa-globe-americas' ) }}</span>
-
-																			<input type="text" name="branch_country" id="branch_country" class="form-control no-left-border-radius" placeholder="País de Sucursal" tabindex="2">
-
-																	</div>
-
-																	<div class="input-group margin-top-10">
-
-																			<span class="input-group-addon span-signin no-right-border-radius">{{ Form::hint( 'Provincia o estado dónde se encuentra la sucursal', 'bottom', 'fas fa-tree' ) }}</span>
-
-																			<input type="text" name="branch_province" id="branch_province" class="form-control no-left-border-radius" placeholder="Provincia de Sucursal" tabindex="3">
-
-																	</div>
-
-																	<div class="input-group margin-top-10">
-
-																			<span class="input-group-addon span-signin no-right-border-radius">{{ Form::hint( 'Ciudad dónde se encuentra la sucursal', 'bottom', 'fas fa-city' ) }}</span>
-
-																			<input type="text" name="branch_city" id="branch_city" class="form-control no-left-border-radius" placeholder="Ciudad de Sucursal" tabindex="4">
-
-																	</div>
-
-																	<div class="input-group margin-top-10">
-
-																			<span class="input-group-addon span-signin no-right-border-radius">{{ Form::hint( 'Dirección completa de la sucursal (calle y número)', 'bottom', 'fas fa-road' ) }}</span>
-
-																			<input type="text" name="branch_address" id="branch_address" class="form-control no-left-border-radius" placeholder="Dirección de Sucursal" tabindex="5">
-
-																	</div>
-
-																	<div class="input-group margin-top-10">
-
-																			<span class="input-group-addon span-signin no-right-border-radius">{{ Form::hint( 'Piso del edificio en el que se encuentra la sucursal (número de piso)', 'bottom', 'fas fa-building' ) }}</span>
-
-																			<input type="text" name="branch_floor" id="branch_floor" class="form-control no-left-border-radius" placeholder="Piso de Sucursal" tabindex="6">
-
-																	</div>
-
-																	<div class="input-group margin-top-10">
-
-																			<span class="input-group-addon span-signin no-right-border-radius">{{ Form::hint( 'Departamento o sección dónde se enuentra la sucursal (n)', 'bottom', 'fas fa-door-closed' ) }}</span>
-
-																			<input type="text" name="branch_apartment" id="branch_apartment" class="form-control no-left-border-radius" placeholder="Departamento de Sucursal" tabindex="7">
-
-																	</div>
-
-															</div>
-
-															<div class="col-md-6">
-
-															</div>
-
-													</div>
-
-			                </div>
+											</div>
 
 			            </div>
 

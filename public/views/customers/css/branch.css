@@ -1,0 +1,22 @@
+.branchLabel
+{
+
+    border-bottom:1px solid #eee;
+    padding:10px 0px;
+    cursor:pointer;
+
+}
+
+.mainBranchLabel
+{
+
+    font-weight: bold;
+
+}
+
+.branchTab
+{
+
+    min-height: 20em;
+
+}
