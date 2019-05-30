@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Schema;
 
-
 /*
 |--------------------------------------------------------------------------
 | Load Dynamic Middlewares
@@ -20,10 +19,10 @@ if( Schema::hasTable( 'middlewares' ) )
 		foreach( $middlewares as $middleware )
 		{
 
-				if( !in_array( $middleware->class, $this->middleware ) )
+				if( !in_array( $middleware->class, $this->router->getMiddleware() ) )
 				{
 
-						$this->middleware[ $middleware->name ] = $middleware->class;
+						$this->router->aliasMiddleware( $middleware->name, $middleware->class );
 
 				}
 
